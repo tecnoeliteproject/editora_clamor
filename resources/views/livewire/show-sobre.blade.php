@@ -3,9 +3,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-8 mx-auto text-center">
-                    <h2 class="mb-3 text-capitalize">About Us</h2>
+                    <h2 class="mb-3 text-capitalize">Sobre nós</h2>
                     <ul class="list-inline breadcrumbs text-capitalize" style="font-weight:500">
-                        <li class="list-inline-item"><a href="index.html">Home</a>
+                        <li class="list-inline-item"><a href="/">Home</a>
                         </li>
                         <li class="list-inline-item">/ &nbsp; <a href="about.html">About</a>
                         </li>
@@ -67,7 +67,7 @@
             <div class="row justify-content-center align-items-center">
                 <div class="col-lg-7">
                     <div class="section-title">
-                        <p class="text-primary text-uppercase fw-bold mb-3">About Us</p>
+                        <p class="text-primary text-uppercase fw-bold mb-3">Sobre nós</p>
                         <h2 class="h1 mb-4">Lorum ipsum doller</h2>
                         <div class="content pe-0 pe-lg-5">
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor

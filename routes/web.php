@@ -19,15 +19,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-/*
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
-*/
-Route::get('/', ShowHome::class)->name('inicio');
-Route::get('/sobre', ShowSobre::class)->name('sobre');
-Route::get('/servicos', ShowServicos::class)->name('servicos');
-Route::get('/servico/{id}', ShowServico::class)->name('servico');
-Route::get('/time', ShowTime::class)->name('time');
-Route::get('/faq', ShowFAQ::class)->name('faq');
-Route::get('/contacto', ShowContacto::class)->name('contacto');
+
+// Route::get('/', ShowHome::class)->name('inicio');
+// Route::get('/sobre', ShowSobre::class)->name('sobre');
+// Route::get('/servicos', ShowServicos::class)->name('servicos');
+// Route::get('/servico/{id}', ShowServico::class)->name('servico');
+// Route::get('/time', ShowTime::class)->name('time');
+// Route::get('/faq', ShowFAQ::class)->name('faq');
+// Route::get('/contacto', ShowContacto::class)->name('contacto');

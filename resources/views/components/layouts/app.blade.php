@@ -87,7 +87,7 @@
                     <div class="footer-widget">
                         <h5 class="mb-4 text-primary font-secondary">Quick Links</h5>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a href="#!">About Us</a>
+                            <li class="mb-2"><a href="#!">Sobre nós</a>
                             </li>
                             <li class="mb-2"><a href="#!">Contact Us</a>
                             </li>
