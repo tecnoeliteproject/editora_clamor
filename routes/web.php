@@ -7,6 +7,7 @@ use App\Livewire\ShowServico;
 use App\Livewire\ShowServicos;
 use App\Livewire\ShowSobre;
 use App\Livewire\ShowTime;
+use App\Models\Servico;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +22,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('index');
+    $servicos = Servico::orderBy('nome', 'ASC')->get();
+
+    return view('index', [
+        'servicos' => $servicos
+    ]);
 });
 
 // Route::get('/', ShowHome::class)->name('inicio');

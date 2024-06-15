@@ -165,7 +165,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="coffee_taital">OUR Coffee OFFER</h1>
+                    <h1 class="coffee_taital">Nossos serviços</h1>
                 </div>
             </div>
         </div>
@@ -175,114 +175,16 @@
                     <div class="carousel-item active">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-1.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">TYPES OF COFFEE</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
+                                @foreach ($servicos as $key => $service)
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="coffee_img"><img src="storage/{{ url($service->imagem) }}"></div>
+                                        <div class="coffee_box">
+                                            <h3 class="types_text">{{ $service->nome }}</h3>
+                                            <p class="looking_text">Entre em contacto para mais informações</p>
+                                            <div class="read_bt"><a href="#">Read More</a></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-2.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">BEAN VARIETIES</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-3.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">COFFEE & PASTRY</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-4.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">COFFEE TO GO</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-1.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">TYPES OF COFFEE</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-2.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">BEAN VARIETIES</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-3.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">COFFEE & PASTRY</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-4.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">COFFEE TO GO</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-1.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">TYPES OF COFFEE</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-2.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">BEAN VARIETIES</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-3.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">COFFEE & PASTRY</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/img-4.png"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">COFFEE TO GO</h3>
-                                        <p class="looking_text">looking at its layout. The point of</p>
-                                        <div class="read_bt"><a href="#">Read More</a></div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -436,7 +338,7 @@
                     <div class="map_main">
                         <div class="map-responsive">
                             <iframe
-                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France"
+                                src="https://www.google.com/maps/embed?pb=!1m24!1m12!1m3!1d6256.578671964034!2d16.93868083703145!3d-12.38453090965461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m9!3e6!4m3!3m2!1d-12.3848842!2d16.9389737!4m3!3m2!1d-12.3844804!2d16.9402139!5e0!3m2!1spt-PT!2sao!4v1718373777962!5m2!1spt-PT!2sao"
                                 width="250" height="500" frameborder="0" style="border:0; width: 100%;"
                                 allowfullscreen=""></iframe>
                         </div>
