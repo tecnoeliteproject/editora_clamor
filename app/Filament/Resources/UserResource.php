@@ -60,7 +60,7 @@ class UserResource extends Resource
                                     return match ($state) {
                                          'ADMIN'=> 'danger',
                                           'EDITOR'=> 'info',
-                                          'USER' => 'success',
+                                          'CLIENT' => 'success',
                                     };
                                 }),
             ])

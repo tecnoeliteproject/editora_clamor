@@ -26,7 +26,7 @@ class ClientPanelProvider extends PanelProvider
             ->id('client')
             ->path('client')
             ->colors([
-                'primary' => Color::Blue,
+                'primary' =>"#C97450",
             ])
             ->login()
             ->registration()
@@ -37,8 +37,7 @@ class ClientPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Client/Widgets'), for: 'App\\Filament\\Client\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                Widgets\StatsOverviewWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

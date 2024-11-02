@@ -11,13 +11,18 @@ class UserPolicy
         return true;
     }
 
+    public function viewClient(User $user): bool
+    {
+        return $user->isClient();
+    }
+
 
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -25,7 +30,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -33,7 +38,7 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -41,7 +46,7 @@ class UserPolicy
      */
     public function update(User $user, User $model): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**
@@ -49,12 +54,12 @@ class UserPolicy
      */
     public function delete(User $user, User $model): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     public function deleteAny(User $user): bool
     {
-        return true;
+        return $user->isAdmin();
     }
 
     /**

@@ -23,16 +23,21 @@ class User extends Authenticatable implements FilamentUser
 
     const ROLE_ADMIN = 'ADMIN';
     const ROLE_EDITOR = 'EDITOR';
-    const ROLE_USER = 'USER';
+    const ROLE_CLIENT = 'CLIENT';
 
     const ROLES = [
         self::ROLE_ADMIN => 'Admin',
         self::ROLE_EDITOR => 'Editor',
-        self::ROLE_USER => 'User',
+        self::ROLE_CLIENT => 'Client',
     ];
 
     public function canAccessPanel(Panel $panel): bool{
         return $this-> can('view-admin', User::class);
+    }
+
+    public function perfilCliente()
+    {
+        return $this->hasOne(PerfilCliente::class);
     }
 
     public function isAdmin(){
@@ -41,6 +46,10 @@ class User extends Authenticatable implements FilamentUser
 
     public function isEditor(){
         return $this-> role === self::ROLE_EDITOR;
+    }
+
+    public function isClient(){
+        return $this-> role === self::ROLE_CLIENT;
     }
 
     protected $fillable = [
