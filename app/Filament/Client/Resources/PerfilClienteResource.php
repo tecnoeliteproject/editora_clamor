@@ -23,6 +23,7 @@ class PerfilClienteResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public $user;
+    public $perfilClient;
 
     public function mount()
     {
@@ -34,6 +35,7 @@ class PerfilClienteResource extends Resource
     {
         return $form
             ->schema([
+
                 TextInput::make('user_id')
                     ->default(Auth::user()->id)
                     ->label('Usuário')
@@ -51,32 +53,13 @@ class PerfilClienteResource extends Resource
                 Select::make('nivel_academico')
                     ->label('Nível Acadêmico')
                     ->options([
-                        'fundamental' => 'Fundamental',
-                        'medio' => 'Médio',
+                        'Básico' => 'Básico',
+                        'Médio' => 'Médio',
                         'Licenciado' => 'Licenciado',
+                        'Mestre' => 'Mestre',
+                        'PhD' => 'PhD',
                     ])
                     ->required(),
-            ]);
-    }
-
-    public static function table(Table $table): Table
-    {
-        return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
-                ]),
             ]);
     }
 
@@ -89,17 +72,45 @@ class PerfilClienteResource extends Resource
 
     public static function getPages(): array
     {
+        $user = Auth::user();
+  /*
+        // Verifica se o perfil já existe para o cliente logado
+        if ($user->perfilClient) {
+            // Redireciona para o formulário de edição do perfil existente
+            return ['index' => Pages\EditPerfilCliente::route('/{record}/edit')];
+        } else {
+            // Redireciona para o formulário de criação de um novo perfil
+           return ['index' => Pages\CreatePerfilCliente::route('/')];
+        }
+   */
         return [
-            'index' => Pages\ListPerfilClientes::route('/'),
-            //'create' => Pages\CreatePerfilCliente::route('/create'),
+           // 'index' => Pages\ListPerfilClientes::route('/'),
+            'index' => Pages\CreatePerfilCliente::route('/'),
             'edit' => Pages\EditPerfilCliente::route('/{record}/edit'),
         ];
+
     }
+
+
 
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
 
+
+    public static function beforeCreate(Form $form, $record)
+{
+    // Atribui automaticamente o ID do usuário logado ao perfil
+    $record->user_id = auth()->id();
+}
+
+public static function beforeSave(Form $form, $record)
+{
+    // Garante que o ID do usuário logado esteja no perfil durante edições
+    if (empty($record->user_id)) {
+        $record->user_id = auth()->id();
+    }
+}
 
 }
