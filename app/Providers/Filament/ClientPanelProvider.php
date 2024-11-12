@@ -26,9 +26,8 @@ class ClientPanelProvider extends PanelProvider
             ->id('client')
             ->path('client')
             ->colors([
-                'primary' =>"#C97450",
+                'primary' =>Color::Blue,
             ])
-            ->viteTheme('resources/css/filament/client/theme.css')
             ->login()
             ->registration()
             ->discoverResources(in: app_path('Filament/Client/Resources'), for: 'App\\Filament\\Client\\Resources')
