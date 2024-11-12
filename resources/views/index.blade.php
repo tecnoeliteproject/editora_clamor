@@ -177,7 +177,7 @@
                             <div class="row">
                                 @foreach ($servicos as $key => $service)
                                     <div class="col-lg-3 col-md-6">
-                                        <div class="coffee_img"><img src="storage/{{ url($service->imagem) }}"></div>
+                                        <div class="coffee_img"><img src="{{ url('storage/'.$service->imagem) }}"></div>
                                         <div class="coffee_box">
                                             <h3 class="types_text">{{ $service->nome }}</h3>
                                             <p class="looking_text">Entre em contacto para mais informações</p>
