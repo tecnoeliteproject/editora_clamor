@@ -23,6 +23,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\Action;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ServicoResource extends Resource
 {
@@ -75,6 +77,27 @@ class ServicoResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->headerActions([
+                Action::make('Imprimir Relatório')
+                ->icon('heroicon-o-printer')
+                ->color('primary')
+                ->action(function () {
+                    // Gera o PDF diretamente
+                    $servicos = Servico::with('observacaos')->get(); // Inclua as observações relacionadas
+
+                    $pdf = Pdf::loadView('relatorios.servicos', ['servicos' => $servicos]);
+                    return response()->streamDownload(
+                        fn () => print($pdf->output()),
+                        'relatorio-servicos.pdf'
+                    );
+                }),
+            ])
+
+
+
+
+
+
             ->filters([
                 TernaryFilter::make('estado')->label('Disponível?'),
             ])

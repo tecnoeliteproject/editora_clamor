@@ -1,9 +1,9 @@
 @import '/vendor/filament/filament/resources/css/theme.css';
 
-@config '../../../../tailwind.config.js';
+@config 'tailwind.config.js';
 
 .fi-sidebar {
-    @apply bg-slate-600 dark:bg-transparent !important;
+    @apply bg-primary-600 dark:bg-transparent !important;
 }
 
 .fi-sidebar-group div span {

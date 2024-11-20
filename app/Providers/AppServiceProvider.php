@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use App\Filament\Resources\ServicoResource;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,4 +23,19 @@ class AppServiceProvider extends ServiceProvider
     {
         Model::unguard();
     }
+
+    public function registerPages(): void
+    {
+        $this->pages([
+            UserReport::class,
+        ]);
+    }
+
+    public function boots(): void
+{
+    Filament::registerResources([
+        ServicoResource::class,
+    ]);
 }
+}
+

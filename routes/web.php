@@ -9,6 +9,8 @@ use App\Livewire\ShowSobre;
 use App\Livewire\ShowTime;
 use App\Models\Servico;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFReportController;
+use App\Http\Controllers\RelatorioServicoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,14 @@ Route::get('/', function () {
         'servicos' => $servicos
     ]);
 });
+
+Route::get('/relatorios/usuarios', [PDFReportController::class, 'generateUserReport'])
+    ->name('generate.user.report');
+
+Route::get('/relatorio/servicos', [RelatorioServicoController::class, 'gerarRelatorio'])
+    ->name('relatorio.servicos');
+
+
 
 // Route::get('/', ShowHome::class)->name('inicio');
 // Route::get('/sobre', ShowSobre::class)->name('sobre');

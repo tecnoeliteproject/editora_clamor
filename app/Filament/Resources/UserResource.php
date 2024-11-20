@@ -14,6 +14,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Filament\Tables\Actions\Action;
 
 class UserResource extends Resource
 {
@@ -60,7 +62,7 @@ class UserResource extends Resource
                                     return match ($state) {
                                          'ADMIN'=> 'danger',
                                           'EDITOR'=> 'info',
-                                          'CLIENT' => 'success',
+                                          'USER' => 'success',
                                     };
                                 }),
             ])
@@ -75,7 +77,22 @@ class UserResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                 Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->headerActions([
+                Action::make('Imprimir Relatório')
+                    ->icon('heroicon-o-printer')
+                    ->color('primary')
+                    ->action(function () {
+                        // Gera o PDF diretamente
+                        $users = \App\Models\User::all();
+
+                        $pdf = Pdf::loadView('relatorios.users', ['users' => $users]);
+                        return response()->streamDownload(
+                            fn () => print($pdf->output()),
+                            'relatorio-usuarios.pdf'
+                        );
+                    }),
+                ]);
     }
 
     public static function getRelations(): array
