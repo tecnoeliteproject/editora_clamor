@@ -55,7 +55,10 @@
                             <a class="nav-link" href="#servicos">Serviços</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#contacto">Contacto</a>
+                            <a class="nav-link" href="blog.html">Notícias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contacto</a>
                         </li>
                     </ul>
                     <li>
@@ -96,7 +99,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="banner_taital_main">
-                                        <h1 class="banner_taital">Faça a venda <br>de seus livros</h1>
+                                        <h1 class="banner_taital">Editora <br>Clamor</h1>
 
                                         <div class="btn_main">
                                             <div class="about_bt active"><a href="#">Fale conosco</a></div>
@@ -110,7 +113,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="banner_taital_main">
-                                        <h1 class="banner_taital">Coffee <br>Shop</h1>
+                                        <h1 class="banner_taital">Editora<br>Clamor</h1>
 
                                         <div class="btn_main">
                                             <div class="about_bt active"><a href="#">Sobre nós</a></div>
@@ -141,16 +144,13 @@
                     <div class="col">
                         <div class="about_taital_box">
                             <h1 class="about_taital">Sobre nós</h1>
-                            <h1 class="about_taital_1">Editora</h1>
-                            <p class=" about_text">has a more-or-less normal distribution of letters, as opposed to
-                                using 'Content here, content here', making it look like readable English. Many desktop
-                                publishing packages and web page editorhas a more-or-less normal distribution of
-                                letters, as oppos</p>
-                            <div class="readmore_btn"><a href="#">Read More</a></div>
+                            <h1 class="about_taital_1">Editora Clamor '</h1>
+                            <p class=" about_text">A Editora Clamor nasceu com o propósito de dar voz às histórias, ideias e sonhos que clamam por serem ouvidos. Nossa missão é conectar autores e leitores, publicando obras que inspiram, educam e transformam vidas. Com dedicação à qualidade editorial, buscamos destacar talentos e contribuir para um mundo mais reflexivo e consciente</p>
+                            <div class="readmore_btn"><a href="#">Ler mais</a></div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="image_iman"><img src="images/home/home_banner.jpg" class="about_img"></div>
+                        <div class="image_iman"><img src="images/editora2.png" class="about_img"></div>
                     </div>
                 </div>
             </div>
@@ -172,13 +172,14 @@
                     <div class="carousel-item active">
                         <div class="container-fluid">
                             <div class="row">
-                                <div class="col-lg-3 col-md-6">
-                                    <div class="coffee_img"><img src="images/home/publicacao.jpg"></div>
-                                    <div class="coffee_box">
-                                        <h3 class="types_text">Publicação de Livros</h3>
-                                        <p class="looking_text">Edição, revisão, diagramação e registro de obras
-                                            físicas e digitais.</p>
-                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
+                                @foreach ($servicos as $key => $service)
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="coffee_img"><img src="{{ url('storage/'.$service->imagem) }}"></div>
+                                        <div class="coffee_box">
+                                            <h3 class="types_text">{{ $service->nome }}</h3>
+                                            <p class="looking_text">Entre em contacto para mais informações</p>
+                                            <div class="read_bt"><a href="#">Mais Detalhes</a></div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-md-6">
@@ -273,19 +274,17 @@
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col-md-12">
-                                <h1 class="about_taital">O que dizem os nossos clientes</h1>
+                                <h1 class="about_taital">O que os nossos clientes dizem</h1>
                             </div>
                         </div>
                         <div class="client_section_2">
                             <div class="client_taital_main">
                                 <div class="client_left">
-                                    <div class="client_img"><img src="images/client-img2.png"></div>
+                                    <div class="client_img"><img src="images/1.png"></div>
                                 </div>
                                 <div class="client_right">
-                                    <h3 class="moark_text">Joy Moark</h3>
-                                    <p class="client_text">now use Lorem Ipsum as their default model text, and a
-                                        search for 'lorem ipsum' will uncover many web sites still in their infancynow
-                                        use Lorem Ipsum as their default model text, </p>
+                                    <h3 class="moark_text">Jão Domingos</h3>
+                                    <p class="client_text">A Editora Clamor superou minhas expectativas! Meu livro ficou incrível, e o suporte durante todo o processo foi impecável. Recomendo demais!</p>
                                 </div>
                             </div>
                         </div>
@@ -293,19 +292,17 @@
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-md-12">
-                                <h1 class="about_taital">What syas customers</h1>
+                                <h1 class="about_taital">O que os nossos clientes dizem</h1>
                             </div>
                         </div>
                         <div class="client_section_2">
                             <div class="client_taital_main">
                                 <div class="client_left">
-                                    <div class="client_img"><img src="images/client-img1.png"></div>
+                                    <div class="client_img"><img src="images/2.png"></div>
                                 </div>
                                 <div class="client_right">
-                                    <h3 class="moark_text">Joy Moark</h3>
-                                    <p class="client_text">now use Lorem Ipsum as their default model text, and a
-                                        search for 'lorem ipsum' will uncover many web sites still in their infancynow
-                                        use Lorem Ipsum as their default model text, </p>
+                                    <h3 class="moark_text">Fadília Adriano</h3>
+                                    <p class="client_text">Os títulos da Editora Clamor são sempre envolventes e bem trabalhados. Dá para sentir o cuidado com cada detalhe. Sou fã!</p>
                                 </div>
                             </div>
                         </div>
@@ -313,19 +310,17 @@
                     <div class="carousel-item">
                         <div class="row">
                             <div class="col-md-12">
-                                <h1 class="about_taital">What syas customers</h1>
+                                <h1 class="about_taital">O que os nossos clientes dizem</h1>
                             </div>
                         </div>
                         <div class="client_section_2">
                             <div class="client_taital_main">
                                 <div class="client_left">
-                                    <div class="client_img"><img src="images/client-img1.png"></div>
+                                    <div class="client_img"><img src="images/3.png"></div>
                                 </div>
                                 <div class="client_right">
-                                    <h3 class="moark_text">Joy Moark</h3>
-                                    <p class="client_text">now use Lorem Ipsum as their default model text, and a
-                                        search for 'lorem ipsum' will uncover many web sites still in their infancynow
-                                        use Lorem Ipsum as their default model text, </p>
+                                    <h3 class="moark_text">Elisa Antónia</h3>
+                                    <p class="client_text">Publicar com a Editora Clamor foi um sonho realizado. Eles acreditaram na minha ideia e transformaram meu projeto em uma obra que toca o coração das pessoas.</p>
                                 </div>
                             </div>
                         </div>
@@ -336,14 +331,46 @@
             </div>
         </div>
     </div>
-
+    <!-- client section end -->
+    <!-- blog section start -->
+    <div class="blog_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="about_taital">Notícias</h1>
+                </div>
+            </div>
+            <div class="blog_section_2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="blog_box">
+                            <div class="blog_img"><img src="images/diploma.png"></div>
+                            <h4 class="date_text">16 Setembro</h4>
+                            <h4 class="prep_text">Entrega de Certificado dos Vencedores ao concurso de Redação de contos</h4>
+                            <p class="lorem_text">A cerimônia de entrega dos certificados aos vencedores do Concurso de Redação de Contos foi marcada por emoção e celebração do talento literário. Realizado na Mediateca Abel Abraão, o evento reuniu participantes, familiares e convidados para prestigiar os autores que se destacaram com suas narrativas criativas e cativantes</p>
+                        </div>
+                        <div class="read_btn"><a href="#">Ler Mais</a></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="blog_box">
+                            <div class="blog_img"><img src="images/venda.png"></div>
+                            <h4 class="date_text">10 Novembro</h4>
+                            <h4 class="prep_text">Lançamento do Livro "O que os líderes não têm coragem de falar"</h4>
+                            <p class="lorem_text">Em uma noite marcada por debates instigantes e reflexões profundas, foi realizado o aguardado lançamento do livro "O que os Líderes Não Têm Coragem de Falar", de Galvão Chalale. O evento, que ocorreu no Auditório da Politécnica, reuniu líderes empresariais, acadêmicos e leitores interessados em explorar os desafios e dilemas enfrentados no mundo da liderança</p>
+                        </div>
+                        <div class="read_btn"><a href="#">Ler Mais</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- blog section end -->
     <!-- contact section start -->
     <div class="contact_section layout_padding">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h1 class="contact_taital">Deixe uma mensagem</h1>
+                    <h1 class="contact_taital">Entre em contacto</h1>
                 </div>
             </div>
         </div>
@@ -352,9 +379,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mail_section_1">
-                            <input type="text" class="mail_text" placeholder="Seu nome" name="Your Name">
-                            <input type="text" class="mail_text" placeholder="Seu email" name="Your Email">
-                            <input type="text" class="mail_text" placeholder="Seu telefone" name="Your Phone">
+                            <input type="text" class="mail_text" placeholder="Seu Nome" name="Seu Nome">
+                            <input type="text" class="mail_text" placeholder="Seu Email" name="Seu Email">
+                            <input type="text" class="mail_text" placeholder="Seu Telefone" name="Seu Telefone">
                             <textarea class="massage-bt" placeholder="Mensagem" rows="5" id="comment" name="Massage"></textarea>
                             <div class="send_bt"><a href="#">Enviar</a></div>
                         </div>
@@ -390,16 +417,21 @@
                             <li>
                                 <a href="#">
                                     <i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left_10">+244
-                                        999 999 999</span>
+                                        936971764</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
                                     <i class="fa fa-envelope" aria-hidden="true"></i><span
-                                        class="padding_left_10">editoraclamor@gmail.com</span>
+                                        class="padding_left_10">fadilia@gmail.com</span>
                                 </a>
                             </li>
                         </ul>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="update_mail" placeholder="Seu Email" rows="5" id="comment" name="Your Email"></textarea>
+                        <div class="subscribe_bt"><a href="#"><i class="fa fa-arrow-right"
+                                    aria-hidden="true"></i></a></div>
                     </div>
                 </div>
             </div>
@@ -411,7 +443,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <p class="copyright_text">2024. Todos os direitos reservados.</p>
+                    <p class="copyright_text">2024 . ISPB <a href="https://html.design">Engenharia Informática</a>
                 </div>
             </div>
         </div>
