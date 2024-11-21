@@ -4,12 +4,14 @@ namespace App\Providers\Filament;
 
 use App\Filament\Client\Pages\CompleteSignup;
 use App\Http\Responses\CustomLoginResponse;
+use App\Http\Responses\CustomRegistrationResponse;
 use App\Models\PerfilCliente;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Http\Responses\Auth\Contracts\RegistrationResponse;
 use Filament\Http\Responses\Auth\LoginResponse;
 use Filament\Navigation\NavigationBuilder;
 use Filament\Navigation\NavigationGroup;
@@ -41,6 +43,7 @@ class ClientPanelProvider extends PanelProvider
         return $panel
             ->bootUsing(function () {
                 app()->bind(LoginResponse::class, CustomLoginResponse::class);
+                app()->bind(RegistrationResponse::class, CustomRegistrationResponse::class);
             })
             ->id('client')
             ->path('client')
@@ -84,7 +87,7 @@ class ClientPanelProvider extends PanelProvider
                                 ->icon('heroicon-o-shopping-cart')
                                 ->url('/client/service-center'),
                         ])
-                        ;
+                    ;
                 } else {
                     return $builder;
                 }
