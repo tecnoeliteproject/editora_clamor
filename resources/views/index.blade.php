@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <!-- site metas -->
-    <title>Coffo</title>
+    <title>Editora Clamor</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -49,16 +49,13 @@
                             <a class="nav-link" href="/">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">Sobre</a>
+                            <a class="nav-link" href="#sobre">Sobre</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="coffees.html">Serviços</a>
+                            <a class="nav-link" href="#servicos">Serviços</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="blog.html">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contacto</a>
+                            <a class="nav-link" href="#contacto">Contacto</a>
                         </li>
                     </ul>
                     <li>
@@ -99,17 +96,17 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="banner_taital_main">
-                                        <h1 class="banner_taital">Coffee <br>Shop</h1>
+                                        <h1 class="banner_taital">Faça a venda <br>de seus livros</h1>
 
                                         <div class="btn_main">
-                                            <div class="about_bt active"><a href="#">Sobre nós</a></div>
+                                            <div class="about_bt active"><a href="#">Fale conosco</a></div>
                                             <div class="callnow_bt"><a href="#">Ligue agora</a></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-item">
+                        {{-- <div class="carousel-item">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="banner_taital_main">
@@ -122,7 +119,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     <a class="carousel-control-prev" href="#banner_slider" role="button" data-slide="prev">
                         <i class="fa fa-arrow-left"></i>
@@ -137,14 +134,14 @@
     </div>
     <!-- header section end -->
     <!-- about section start -->
-    <div class="about_section layout_padding">
+    <div class="about_section layout_padding" id="sobre">
         <div class="container">
             <div class="about_section_2">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col">
                         <div class="about_taital_box">
-                            <h1 class="about_taital">Sobre nós shop</h1>
-                            <h1 class="about_taital_1">Coffee distribution '</h1>
+                            <h1 class="about_taital">Sobre nós</h1>
+                            <h1 class="about_taital_1">Editora</h1>
                             <p class=" about_text">has a more-or-less normal distribution of letters, as opposed to
                                 using 'Content here, content here', making it look like readable English. Many desktop
                                 publishing packages and web page editorhas a more-or-less normal distribution of
@@ -153,7 +150,7 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="image_iman"><img src="images/about-img.png" class="about_img"></div>
+                        <div class="image_iman"><img src="images/home/home_banner.jpg" class="about_img"></div>
                     </div>
                 </div>
             </div>
@@ -161,7 +158,7 @@
     </div>
     <!-- about section end -->
     <!-- coffee section start -->
-    <div class="coffee_section layout_padding">
+    <div class="coffee_section layout_padding" id="servicos">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -175,19 +172,88 @@
                     <div class="carousel-item active">
                         <div class="container-fluid">
                             <div class="row">
-                                @foreach ($servicos as $key => $service)
-                                    <div class="col-lg-3 col-md-6">
-                                        <div class="coffee_img"><img src="{{ url('storage/'.$service->imagem) }}"></div>
-                                        <div class="coffee_box">
-                                            <h3 class="types_text">{{ $service->nome }}</h3>
-                                            <p class="looking_text">Entre em contacto para mais informações</p>
-                                            <div class="read_bt"><a href="#">Read More</a></div>
-                                        </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="coffee_img"><img src="images/home/publicacao.jpg"></div>
+                                    <div class="coffee_box">
+                                        <h3 class="types_text">Publicação de Livros</h3>
+                                        <p class="looking_text">Edição, revisão, diagramação e registro de obras
+                                            físicas e digitais.</p>
+                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
                                     </div>
-                                @endforeach
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="coffee_img"><img src="images/home/consultoria.jpg"></div>
+                                    <div class="coffee_box">
+                                        <h3 class="types_text">Consultoria Literária</h3>
+                                        <p class="looking_text">Avaliação de manuscritos e mentoria personalizada para
+                                            autores.</p>
+                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="coffee_img"><img src="images/home/marketing.jpg"></div>
+                                    <div class="coffee_box">
+                                        <h3 class="types_text">Marketing e Divulgação</h3>
+                                        <p class="looking_text">Campanhas promocionais, redes sociais e assessoria de
+                                            imprensa.</p>
+                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="coffee_img"><img src="images/home/distribuicao.jpg"></div>
+                                    <div class="coffee_box">
+                                        <h3 class="types_text">Distribuição</h3>
+                                        <p class="looking_text">Logística, envio e parcerias com marketplaces
+                                            literários.</p>
+                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="carousel-item">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="coffee_img"><img src="images/home/producao_conteudo.jpg"></div>
+                                    <div class="coffee_box">
+                                        <h3 class="types_text">Produção de Conteúdo</h3>
+                                        <p class="looking_text">Ghostwriting, materiais corporativos e livros
+                                            educativos.</p>
+                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="coffee_img"><img src="images/home/multimidia.jpg"></div>
+                                    <div class="coffee_box">
+                                        <h3 class="types_text">Criação Multimídia</h3>
+                                        <p class="looking_text">Audiobooks, livros interativos e podcasts literários.
+                                        </p>
+                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="coffee_img"><img src="images/home/formacao.jpg"></div>
+                                    <div class="coffee_box">
+                                        <h3 class="types_text">Formação e Cursos</h3>
+                                        <p class="looking_text">Workshops de escrita criativa e palestras para
+                                            escritores.</p>
+                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="coffee_img"><img src="images/home/direitos.jpg"></div>
+                                    <div class="coffee_box">
+                                        <h3 class="types_text">Gestão de Direitos Autorais</h3>
+                                        <p class="looking_text">Registro de obras, licenciamento e proteção de
+                                            propriedade intelectual.</p>
+                                        {{-- <div class="read_bt"><a href="#">Read More</a></div> --}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
                     <i class="fa fa-arrow-left"></i>
@@ -207,13 +273,13 @@
                     <div class="carousel-item active">
                         <div class="row">
                             <div class="col-md-12">
-                                <h1 class="about_taital">What syas customers</h1>
+                                <h1 class="about_taital">O que dizem os nossos clientes</h1>
                             </div>
                         </div>
                         <div class="client_section_2">
                             <div class="client_taital_main">
                                 <div class="client_left">
-                                    <div class="client_img"><img src="images/client-img1.png"></div>
+                                    <div class="client_img"><img src="images/client-img2.png"></div>
                                 </div>
                                 <div class="client_right">
                                     <h3 class="moark_text">Joy Moark</h3>
@@ -265,74 +331,32 @@
                         </div>
                     </div>
                 </div>
-                <a class="carousel-control-prev" href="#custom_slider" role="button" data-slide="prev">
-                    <i class="fa fa-arrow-left"></i>
-                </a>
-                <a class="carousel-control-next" href="#custom_slider" role="button" data-slide="next">
-                    <i class="fa fa-arrow-right"></i>
+
                 </a>
             </div>
         </div>
     </div>
-    <!-- client section end -->
-    <!-- blog section start -->
-    <div class="blog_section layout_padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1 class="about_taital">Our Blog</h1>
-                </div>
-            </div>
-            <div class="blog_section_2">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="blog_box">
-                            <div class="blog_img"><img src="images/blog-img1.png"></div>
-                            <h4 class="date_text">05 April</h4>
-                            <h4 class="prep_text">PREP TECHNIQUES Coffee</h4>
-                            <p class="lorem_text">distracted by the readable content of a page when looking at its
-                                layout. The point of using Lorem Ipsum is that it has a moredistracted by the readable
-                                content of a page when looking at its layout. The point of using Lorem Ipsum is that it
-                                has a more</p>
-                        </div>
-                        <div class="read_btn"><a href="#">Read More</a></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="blog_box">
-                            <div class="blog_img"><img src="images/blog-img2.png"></div>
-                            <h4 class="date_text">05 April</h4>
-                            <h4 class="prep_text">Enjoy Best Coffee</h4>
-                            <p class="lorem_text">distracted by the readable content of a page when looking at its
-                                layout. The point of using Lorem Ipsum is that it has a moredistracted by the readable
-                                content of a page when looking at its layout. The point of using Lorem Ipsum is that it
-                                has a more</p>
-                        </div>
-                        <div class="read_btn"><a href="#">Read More</a></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- blog section end -->
     <!-- contact section start -->
     <div class="contact_section layout_padding">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <h1 class="contact_taital">Get In Touch</h1>
+                    <h1 class="contact_taital">Deixe uma mensagem</h1>
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
+        <div class="container-fluid" id="contacto">
             <div class="contact_section_2">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="mail_section_1">
-                            <input type="text" class="mail_text" placeholder="Your Name" name="Your Name">
-                            <input type="text" class="mail_text" placeholder="Your Email" name="Your Email">
-                            <input type="text" class="mail_text" placeholder="Your Phone" name="Your Phone">
-                            <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
-                            <div class="send_bt"><a href="#">Send</a></div>
+                            <input type="text" class="mail_text" placeholder="Seu nome" name="Your Name">
+                            <input type="text" class="mail_text" placeholder="Seu email" name="Your Email">
+                            <input type="text" class="mail_text" placeholder="Seu telefone" name="Your Phone">
+                            <textarea class="massage-bt" placeholder="Mensagem" rows="5" id="comment" name="Massage"></textarea>
+                            <div class="send_bt"><a href="#">Enviar</a></div>
                         </div>
                     </div>
                     <div class="map_main">
@@ -365,22 +389,17 @@
                         <ul>
                             <li>
                                 <a href="#">
-                                    <i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left_10">+01
-                                        1234567890</span>
+                                    <i class="fa fa-phone" aria-hidden="true"></i><span class="padding_left_10">+244
+                                        999 999 999</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
                                     <i class="fa fa-envelope" aria-hidden="true"></i><span
-                                        class="padding_left_10">demo@gmail.com</span>
+                                        class="padding_left_10">editoraclamor@gmail.com</span>
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="update_mail" placeholder="Your Email" rows="5" id="comment" name="Your Email"></textarea>
-                        <div class="subscribe_bt"><a href="#"><i class="fa fa-arrow-right"
-                                    aria-hidden="true"></i></a></div>
                     </div>
                 </div>
             </div>
@@ -392,9 +411,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
-                    <p class="copyright_text">2020 All Rights Reserved. Design by <a href="https://html.design">Free
-                            Html Templates</a>
-                        Distribution by <a href="https://themewagon.com">ThemeWagon</a></p>
+                    <p class="copyright_text">2024. Todos os direitos reservados.</p>
                 </div>
             </div>
         </div>
