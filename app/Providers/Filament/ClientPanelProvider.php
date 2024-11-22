@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Client\Pages\CompleteSignup;
+use App\Filament\Resources\ServicoResource;
 use App\Http\Responses\CustomLoginResponse;
 use App\Http\Responses\CustomRegistrationResponse;
 use App\Models\PerfilCliente;
@@ -82,6 +83,7 @@ class ClientPanelProvider extends PanelProvider
                                 ->icon('heroicon-o-home')
                                 ->url('/client'),
 
+                            // ...ServicoResource::getNavigationItems(),
                             NavigationItem::make('Serviços')
                                 ->label('Central de Serviços')
                                 ->icon('heroicon-o-shopping-cart')

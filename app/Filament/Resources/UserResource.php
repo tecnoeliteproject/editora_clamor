@@ -55,14 +55,13 @@ class UserResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->badge()
-                    ->color(function(string $state) : string
-                                {
-                                    return match ($state) {
-                                         'ADMIN'=> 'danger',
-                                          'EDITOR'=> 'info',
-                                          'CLIENT' => 'success',
-                                    };
-                                }),
+                    ->color(function (string $state): string {
+                        return match ($state) {
+                            'ADMIN' => 'danger',
+                            'EDITOR' => 'info',
+                            'USER' => 'success',
+                        };
+                    }),
             ])
             ->filters([
                 //
@@ -73,7 +72,7 @@ class UserResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

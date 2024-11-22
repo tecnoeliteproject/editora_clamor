@@ -20,16 +20,13 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ServicoResource extends Resource
 {
     protected static ?string $model = Servico::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-rectangle-group';
-    protected static ?string $modelLabel = 'Serviços';
+    protected static ?string $modelLabel = 'Servicos';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
