@@ -13,11 +13,13 @@ use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\KeyValueEntry;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
@@ -40,7 +42,7 @@ class ServicoResource extends Resource
                     ->options([
                         1 => 'Disponível',
                         0 => 'Indisponível'
-                ]),
+                    ]),
 
                 MarkdownEditor::make('descricao')
                     ->nullable()
@@ -54,11 +56,20 @@ class ServicoResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')
+                TextColumn::make('code')
                     ->sortable(),
                 TextColumn::make('nome')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('descricao')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('pricing_formatted')
+                    ->label('Tabela de Preços')
+                    ->getStateUsing(function (Servico $record): string {
+                        return $record->pricingFormatted();
+                    })
+                    ->disabled(), // Apenas para leitura/ Apenas para leitura,
                 ImageColumn::make('imagem')
                     ->toggleable(),
                 IconColumn::make('estado')
@@ -89,7 +100,7 @@ class ServicoResource extends Resource
     public static function getRelations(): array
     {
         return [
-           ObservacaosRelationManager::class
+            ObservacaosRelationManager::class
         ];
     }
 
