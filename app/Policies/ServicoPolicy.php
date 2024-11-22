@@ -13,7 +13,7 @@ class ServicoPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->isAdmin() || $user->isEditor();
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class ServicoPolicy
      */
     public function view(User $user, Servico $servico): bool
     {
-        return $user->isAdmin() || $user->isEditor();
+        return true;
     }
 
     /**

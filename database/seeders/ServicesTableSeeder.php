@@ -11,7 +11,6 @@ class ServicesTableSeeder extends Seeder
     {
         Servico::insert([
             [
-                'code' => '001',
                 'nome' => 'Redação (Para manuscritos)',
                 'descricao' => 'Serviço de redação baseado em manuscritos entregues.',
                 'pricing' => json_encode([
@@ -24,7 +23,6 @@ class ServicesTableSeeder extends Seeder
                 ]),
             ],
             [
-                'code' => '002',
                 'name' => 'Preparação do texto',
                 'descricao' => 'Preparação técnica do texto.',
                 'pricing' => json_encode([
@@ -37,7 +35,6 @@ class ServicesTableSeeder extends Seeder
                 ]),
             ],
             [
-                'code' => '003',
                 'name' => 'Revisão técnica e linguística',
                 'descricao' => 'Revisão técnica e linguística para manuscritos.',
                 'pricing' => json_encode([
@@ -50,7 +47,6 @@ class ServicesTableSeeder extends Seeder
                 ]),
             ],
             [
-                'code' => '004',
                 'name' => 'Diagramação e Capa',
                 'descricao' => 'Diagramação e criação da capa.',
                 'pricing' => json_encode([
@@ -63,7 +59,6 @@ class ServicesTableSeeder extends Seeder
                 ]),
             ],
             [
-                'code' => '005',
                 'name' => 'Acabamentos e Impressão',
                 'descricao' => 'Impressão e acabamento do material.',
                 'pricing' => json_encode([
@@ -76,7 +71,6 @@ class ServicesTableSeeder extends Seeder
                 ]),
             ],
             [
-                'code' => '006',
                 'name' => 'Registro do livro ISBN e Depósito Legal',
                 'descricao' => 'Registro de ISBN e Depósito Legal.',
                 'pricing' => json_encode([
@@ -84,7 +78,6 @@ class ServicesTableSeeder extends Seeder
                 ]),
             ],
             [
-                'code' => '007',
                 'name' => 'Marketing e Publicação',
                 'descricao' => 'Pacotes de marketing e publicação.',
                 'pricing' => json_encode([
@@ -94,7 +87,6 @@ class ServicesTableSeeder extends Seeder
                 ]),
             ],
             [
-                'code' => '008',
                 'name' => 'Revenda',
                 'descricao' => 'Serviço de revenda.',
                 'pricing' => json_encode([

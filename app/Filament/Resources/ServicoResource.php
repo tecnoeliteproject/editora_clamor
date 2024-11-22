@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ServicoResource\RelationManagers\ObservacaosRelationManager;
 use App\Filament\Resources\ServicoResource\Pages;
-use App\Filament\Resources\ServicoResource\RelationManagers;
-use App\Filament\Resources\ServicoResource\RelationManagers\ObservacaosRelationManager as RelationManagersObservacaosRelationManager;
 use App\Models\Servico;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;

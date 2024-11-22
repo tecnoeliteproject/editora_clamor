@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('provincia');
             $table->string('municipio');
             $table->string('morada');
-            $table->string('copia_bilhete');
+            $table->string('copia_bilhete')->nullable();
             $table->enum('genero', ['masculino', 'feminino', 'outro']);
             $table->enum('estado_civil', ['solteiro', 'casado', 'divorciado', 'viuvo']);
             $table->timestamps();
