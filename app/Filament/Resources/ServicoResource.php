@@ -54,7 +54,7 @@ class ServicoResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')
+                TextColumn::make('code')
                     ->sortable(),
                 TextColumn::make('nome')
                     ->searchable()

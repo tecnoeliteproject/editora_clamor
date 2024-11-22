@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('servicos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('code');
             $table->text('descricao')->nullable();
+            $table->json('pricing')->nullable(); // Preços para diferentes faixas
             $table->String('imagem')->nullable();
             $table->boolean('estado')->default(true);
             $table->timestamps();
