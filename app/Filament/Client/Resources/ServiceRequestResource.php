@@ -14,6 +14,8 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Forms\Set;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -26,6 +28,36 @@ class ServiceRequestResource extends Resource
     protected static ?string $model = ServiceRequest::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $label = 'Solicitar serviço';
+
+    protected static ?string $navigationLabel = 'Solicitar serviço';
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                TextEntry::make('servico.nome')
+                    ->label('Serviço'),
+                TextEntry::make('quantidade_paginas')
+                    ->label('Número de Páginas'),
+                TextEntry::make('preco.price')
+                    ->label('Pacote')
+                    ->state(function (ServiceRequest $record) {
+                        return 'Kz ' . number_format($record->preco->price, 2, ',', '.') . '/pag';
+                    }),
+                TextEntry::make('total_a_pagar')
+                    ->label('Total a Pagar')
+                    ->state(function (ServiceRequest $record) {
+                        $preco = $record->preco->price;
+                        $quantidade_paginas = $record->quantidade_paginas;
+
+                        return 'Kz ' . number_format($preco * $quantidade_paginas, 2, ',', '.');
+                    }),
+                TextEntry::make('observacoes')
+                    ->label('Observações'),
+            ]);
+    }
 
     public static function form(Form $form): Form
     {
@@ -143,7 +175,7 @@ class ServiceRequestResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

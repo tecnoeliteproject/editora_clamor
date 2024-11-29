@@ -5,6 +5,7 @@ namespace App\Providers\Filament;
 use App\Filament\Client\Pages\CompleteSignup;
 use App\Filament\Client\Resources\ServiceRequestResource;
 use App\Filament\Client\Resources\ServicoResource as ResourcesServicoResource;
+use App\Filament\Client\Resources\TabelaPrecoResource;
 use App\Filament\Resources\ServicoResource;
 use App\Http\Responses\CustomLoginResponse;
 use App\Http\Responses\CustomRegistrationResponse;
@@ -87,6 +88,7 @@ class ClientPanelProvider extends PanelProvider
 
                             ...ServicoResource::getNavigationItems(),
                             ...ServiceRequestResource::getNavigationItems(),
+                            ...TabelaPrecoResource::getNavigationItems(),
                             // NavigationItem::make('Serviços')
                             //     ->label('Central de Serviços')
                             //     ->icon('heroicon-o-shopping-cart')

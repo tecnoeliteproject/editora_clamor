@@ -12,8 +12,8 @@ class ListServiceRequests extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\CreateAction::make(),
-        ];
+        return
+            auth()->user()->is_admin ?
+            Actions\CreateAction::make() : [];
     }
 }

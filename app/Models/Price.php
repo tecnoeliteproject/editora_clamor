@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Price extends Model
 {
     use HasFactory;
+
+    public function servico()
+    {
+        return $this->belongsTo(Servico::class);
+    }
 }

@@ -13,7 +13,7 @@ class PricePolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class PricePolicy
      */
     public function view(User $user, Price $price): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class PricePolicy
      */
     public function create(User $user): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -37,7 +37,7 @@ class PricePolicy
      */
     public function update(User $user, Price $price): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -45,7 +45,7 @@ class PricePolicy
      */
     public function delete(User $user, Price $price): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -53,7 +53,7 @@ class PricePolicy
      */
     public function restore(User $user, Price $price): bool
     {
-        //
+        return false;
     }
 
     /**
@@ -61,6 +61,6 @@ class PricePolicy
      */
     public function forceDelete(User $user, Price $price): bool
     {
-        //
+        return false;
     }
 }
