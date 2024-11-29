@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->text('descricao')->nullable();
             $table->String('imagem')->nullable();
-            $table->boolean('estado')->default(false);
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
