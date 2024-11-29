@@ -3,15 +3,12 @@
 namespace App\Filament\Client\Resources;
 
 use App\Filament\Client\Resources\ServicoResource\Pages;
-use App\Filament\Client\Resources\ServicoResource\RelationManagers;
 use App\Models\Servico;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ServicoResource extends Resource
 {

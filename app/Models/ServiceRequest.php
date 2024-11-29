@@ -11,9 +11,19 @@ class ServiceRequest extends Model
     use HasFactory;
     use SoftDeletes;
 
-
-    function servico()
+    // recupera o servico
+    public function servico()
     {
-        return $this->belongsTo(Servico::class);
+        return $this->belongsTo(Servico::class, 'service_id');
     }
+
+    public function preco()
+    {
+        return $this->belongsTo(Price::class, 'price_id');
+    }
+
+    // public function preco_total()
+    // {
+    //     return $this->quantidade_paginas * $this->preco->price;
+    // }
 }

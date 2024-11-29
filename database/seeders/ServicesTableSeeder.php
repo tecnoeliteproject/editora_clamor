@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Price;
 use App\Models\Servico;
 use Illuminate\Database\Seeder;
 
@@ -13,85 +14,263 @@ class ServicesTableSeeder extends Seeder
             [
                 'nome' => 'Redação (Para manuscritos)',
                 'descricao' => 'Serviço de redação baseado em manuscritos entregues.',
-                'pricing' => json_encode([
-                    '50' => 330.00,
-                    '100' => 280.00,
-                    '150' => 230.00,
-                    '200' => 205.00,
-                    '250' => 180.00,
-                    '+250' => 160.00,
-                ]),
             ],
             [
                 'name' => 'Preparação do texto',
                 'descricao' => 'Preparação técnica do texto.',
-                'pricing' => json_encode([
-                    '50' => 102.00,
-                    '100' => 102.00,
-                    '150' => 102.00,
-                    '200' => 102.00,
-                    '250' => 102.00,
-                    '+250' => 102.00,
-                ]),
             ],
             [
                 'name' => 'Revisão técnica e linguística',
                 'descricao' => 'Revisão técnica e linguística para manuscritos.',
-                'pricing' => json_encode([
-                    '50' => 751.00,
-                    '100' => 722.00,
-                    '150' => 693.00,
-                    '200' => 665.00,
-                    '250' => 627.00,
-                    '+250' => 607.00,
-                ]),
             ],
             [
                 'name' => 'Diagramação e Capa',
                 'descricao' => 'Diagramação e criação da capa.',
-                'pricing' => json_encode([
-                    '50' => 608.00,
-                    '100' => 580.00,
-                    '150' => 570.00,
-                    '200' => 560.00,
-                    '250' => 540.00,
-                    '+250' => 500.00,
-                ]),
             ],
             [
                 'name' => 'Acabamentos e Impressão',
                 'descricao' => 'Impressão e acabamento do material.',
-                'pricing' => json_encode([
-                    '50' => 2553.00,
-                    '100' => 2984.00,
-                    '150' => 3283.00,
-                    '200' => 3875.00,
-                    '250' => 4920.00,
-                    '+250' => 4950.00,
-                ]),
             ],
             [
                 'name' => 'Registro do livro ISBN e Depósito Legal',
                 'descricao' => 'Registro de ISBN e Depósito Legal.',
-                'pricing' => json_encode([
-                    'default' => 17835.00, // Preço fixo
-                ]),
             ],
             [
                 'name' => 'Marketing e Publicação',
                 'descricao' => 'Pacotes de marketing e publicação.',
-                'pricing' => json_encode([
-                    '1º Pacote' => 24705.00,
-                    '2º Pacote' => 29405.00,
-                    '3º Pacote' => 147020.00,
-                ]),
             ],
             [
                 'name' => 'Revenda',
                 'descricao' => 'Serviço de revenda.',
-                'pricing' => json_encode([
-                    'default' => 1200.00, // Preço fixo
-                ]),
+            ],
+        ]);
+
+        Price::insert([
+            [
+                'servico_id' => 1,
+                'price' => 330,
+                'quantidade_paginas' => 50,
+            ],
+            [
+                'servico_id' => 1,
+                'price' => 280,
+                'quantidade_paginas' => 100,
+            ],
+            [
+                'servico_id' => 1,
+                'price' => 230,
+                'quantidade_paginas' => 150,
+            ],
+            [
+                'servico_id' => 1,
+                'price' => 205,
+                'quantidade_paginas' => 200,
+            ],
+            [
+                'servico_id' => 1,
+                'price' => 180,
+                'quantidade_paginas' => 250,
+            ],
+            [
+                'servico_id' => 1,
+                'price' => 160,
+                'quantidade_paginas' => 251,
+            ],
+        ]);
+
+        Price::insert([
+            [
+                'servico_id' => 2,
+                'price' => 102,
+                'quantidade_paginas' => 50,
+            ],
+            [
+                'servico_id' => 2,
+                'price' => 102,
+                'quantidade_paginas' => 100,
+            ],
+            [
+                'servico_id' => 2,
+                'price' => 95,
+                'quantidade_paginas' => 150,
+            ],
+            [
+                'servico_id' => 2,
+                'price' => 95,
+                'quantidade_paginas' => 200,
+            ],
+            [
+                'servico_id' => 2,
+                'price' => 71,
+                'quantidade_paginas' => 250,
+            ],
+            [
+                'servico_id' => 2,
+                'price' => 69,
+                'quantidade_paginas' => 251,
+            ],
+        ]);
+
+        Price::insert([
+            [
+                'servico_id' => 3,
+                'price' => 751,
+                'quantidade_paginas' => 50,
+            ],
+            [
+                'servico_id' => 3,
+                'price' => 722,
+                'quantidade_paginas' => 100,
+            ],
+            [
+                'servico_id' => 3,
+                'price' => 693,
+                'quantidade_paginas' => 150,
+            ],
+            [
+                'servico_id' => 3,
+                'price' => 659,
+                'quantidade_paginas' => 200,
+            ],
+            [
+                'servico_id' => 3,
+                'price' => 605,
+                'quantidade_paginas' => 250,
+            ],
+            [
+                'servico_id' => 3,
+                'price' => 527,
+                'quantidade_paginas' => 251,
+            ],
+        ]);
+
+        Price::insert([
+            [
+                'servico_id' => 4,
+                'price' => 903,
+                'quantidade_paginas' => 50,
+            ],
+            [
+                'servico_id' => 4,
+                'price' => 802,
+                'quantidade_paginas' => 100,
+            ],
+            [
+                'servico_id' => 4,
+                'price' => 701,
+                'quantidade_paginas' => 150,
+            ],
+            [
+                'servico_id' => 4,
+                'price' => 600,
+                'quantidade_paginas' => 200,
+            ],
+            [
+                'servico_id' => 4,
+                'price' => 499,
+                'quantidade_paginas' => 250,
+            ],
+            [
+                'servico_id' => 4,
+                'price' => 398,
+                'quantidade_paginas' => 251,
+            ],
+        ]);
+
+        Price::insert([
+            [
+                'servico_id' => 5,
+                'price' => 2553,
+                'quantidade_paginas' => 50,
+            ],
+            [
+                'servico_id' => 5,
+                'price' => 2984,
+                'quantidade_paginas' => 100,
+            ],
+            [
+                'servico_id' => 5,
+                'price' => 3332,
+                'quantidade_paginas' => 150,
+            ],
+            [
+                'servico_id' => 5,
+                'price' => 3875,
+                'quantidade_paginas' => 200,
+            ],
+            [
+                'servico_id' => 5,
+                'price' => 4290,
+                'quantidade_paginas' => 250,
+            ],
+            [
+                'servico_id' => 5,
+                'price' => 4950,
+                'quantidade_paginas' => 251,
+            ],
+        ]);
+
+        Price::insert([
+            [
+                'servico_id' => 6,
+                'price' => 37835,
+                'quantidade_paginas' => 150,
+            ],
+            [
+                'servico_id' => 6,
+                'price' => 659,
+                'quantidade_paginas' => 200,
+            ],
+            [
+                'servico_id' => 6,
+                'price' => 605,
+                'quantidade_paginas' => 250,
+            ],
+            [
+                'servico_id' => 6,
+                'price' => 527,
+                'quantidade_paginas' => 251,
+            ],
+        ]);
+
+        Price::insert([
+            [
+                'servico_id' => 7,
+                'price' => 48930,
+                'quantidade_paginas' => 200,
+            ],
+            [
+                'servico_id' => 7,
+                'price' => 99705,
+                'quantidade_paginas' => 250,
+            ],
+            [
+                'servico_id' => 7,
+                'price' => 147000,
+                'quantidade_paginas' => 251,
+            ],
+        ]);
+
+        Price::insert([
+            [
+                'servico_id' => 8,
+                'price' => 1200,
+                'quantidade_paginas' => 150,
+            ],
+            [
+                'servico_id' => 8,
+                'price' => 1200,
+                'quantidade_paginas' => 200,
+            ],
+            [
+                'servico_id' => 8,
+                'price' => 1200,
+                'quantidade_paginas' => 250,
+            ],
+            [
+                'servico_id' => 8,
+                'price' => 1200,
+                'quantidade_paginas' => 251,
             ],
         ]);
     }

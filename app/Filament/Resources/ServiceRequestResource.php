@@ -24,16 +24,7 @@ class ServiceRequestResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('service_id')
-                    ->relationship('service', 'nome')
-                    ->native(false)
-                    ->required(),
-                Forms\Components\TextInput::make('status')
-                    ->required(),
-                Forms\Components\TextInput::make('comprovativo_pagamento_url')
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('observacoes')
-                    ->columnSpanFull(),
+                
             ]);
     }
 
