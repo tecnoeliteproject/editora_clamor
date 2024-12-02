@@ -62,12 +62,14 @@ class ServicoResource extends Resource
                 TextColumn::make('descricao')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('pricing_formatted')
-                    ->label('Tabela de Preços')
-                    ->getStateUsing(function (Servico $record): string {
-                        return $record->pricingFormatted();
-                    })
-                    ->disabled(), // Apenas para leitura/ Apenas para leitura,
+                // TextColumn::make('pricing_formatted')
+                //     ->label('Tabela de Preços')
+                //     ->getStateUsing(function (Servico $record): string {
+                //         //'return $record->prices->price;'
+
+                //         return $record->pricingFormatted();
+                //     })
+                //     ->disabled(), // Apenas para leitura/ Apenas para leitura,
                 ImageColumn::make('imagem')
                     ->toggleable(),
                 IconColumn::make('estado')
@@ -98,7 +100,7 @@ class ServicoResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ObservacaosRelationManager::class
+            // ObservacaosRelationManager::class
         ];
     }
 

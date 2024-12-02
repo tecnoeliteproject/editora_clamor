@@ -20,13 +20,6 @@ class Servico extends Model
         return $this->hasMany(Price::class);
     }
 
-    function pricingFormatted()
-    {
-        $primeiroValor = $this->prices[0]->price;
-        $ultimoValor = $this->prices[count($this->prices) - 1]->price;
-
-        return 'De ' . number_format($primeiroValor, 2, ',', '.') . ' a ' . number_format($ultimoValor, 2, ',', '.');
-    }
 
     function numeroPaginas()
     {
