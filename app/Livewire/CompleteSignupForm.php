@@ -36,6 +36,7 @@ class CompleteSignupForm extends Component implements HasForms
                         TextInput::make('bi')
                             ->label('NIF/BI')
                             ->length(14)
+                            
                             ->required(),
                         TextInput::make('telefone')
                             ->required(),
