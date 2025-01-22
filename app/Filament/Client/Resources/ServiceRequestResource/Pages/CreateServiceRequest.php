@@ -18,7 +18,14 @@ class CreateServiceRequest extends CreateRecord
     {
         $data['user_id'] = auth()->user()->id;
 
-        $price_id = Price::where('quantidade_paginas', '>=', $data['num_paginas'])->first()->id;
+        $price = Price::where('quantidade_paginas', '>=', $data['num_paginas'])->first();
+
+        if ($price) {
+            $price_id = Price::where('quantidade_paginas', '>=', $data['num_paginas'])->first()->id;
+        } else {
+            $price_id = Price::orderBy('quantidade_paginas', 'desc')->first()->id;
+        }
+
         $data['price_id'] = $price_id;
 
         $data['user_id'] = auth()->user()->id;
