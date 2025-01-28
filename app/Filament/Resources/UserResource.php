@@ -14,6 +14,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\Action;
+
 
 class UserResource extends Resource
 {
@@ -62,6 +64,13 @@ class UserResource extends Resource
                             'USER' => 'success',
                         };
                     }),
+            ])
+            ->headerActions([
+                Action::make('gerarRelatorio')
+                    ->label('Gerar Relatório')
+                    ->color('primary')
+                    ->icon('heroicon-o-document-text')
+                    ->action(fn () => redirect()->route('usuarios.relatorio')),
             ])
             ->filters([
                 //
