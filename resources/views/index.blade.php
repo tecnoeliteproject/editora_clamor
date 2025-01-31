@@ -65,7 +65,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/client/login" class="btn btn-outline-danger ml-3">
+                        <a href="/client/register" class="btn btn-outline-danger ml-3">
                             <i class="fa fa-user" aria-hidden="true"></i>
                             <span class="padding_left_10">Criar uma conta</span>
                         </a>
