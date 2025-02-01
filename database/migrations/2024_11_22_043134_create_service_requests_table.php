@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('service_id')->constrained()->cascadeOnDelete()->on('servicos');
             $table->foreignId('price_id')->constrained()->onDelete('no action');
-            $table->enum('status', ['pendente', 'em andamento', 'finalizada'])->default('pendente');
+            $table->enum('status', ['pendente', 'em andamento', 'finalizada', 'cancelada'])->default('pendente');
             $table->string('comprovativo_pagamento_url')->nullable();
             $table->integer('quantidade_paginas')->nullable();
             $table->text('observacoes')->nullable();
