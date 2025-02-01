@@ -88,6 +88,17 @@
       0 => 'Filament\\Widgets\\WidgetsServiceProvider',
     ),
   ),
+  'joaopaulolndev/filament-pdf-viewer' => 
+  array (
+    'aliases' => 
+    array (
+      'FilamentPdfViewer' => 'Joaopaulolndev\\FilamentPdfViewer\\Facades\\FilamentPdfViewer',
+    ),
+    'providers' => 
+    array (
+      0 => 'Joaopaulolndev\\FilamentPdfViewer\\FilamentPdfViewerServiceProvider',
+    ),
+  ),
   'kirschbaum-development/eloquent-power-joins' => 
   array (
     'providers' => 

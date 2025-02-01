@@ -39,6 +39,8 @@ class ServiceRequestResource extends Resource
             ->schema([
                 TextEntry::make('servico.nome')
                     ->label('Serviço'),
+                TextEntry::make('status')
+                    ->label('Estado'),
                 TextEntry::make('quantidade_paginas')
                     ->label('Número de Páginas'),
                 TextEntry::make('preco.price')
