@@ -136,6 +136,7 @@ class ServiceRequestResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(ServiceRequest::query()->where('user_id', auth()->id()))
             ->columns([
                 Tables\Columns\TextColumn::make('servico.nome')
                     ->sortable(),

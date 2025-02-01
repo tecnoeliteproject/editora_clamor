@@ -56,7 +56,7 @@ class ClientPanelProvider extends PanelProvider
                 \App\Filament\Client\Resources\PerfilClientResource::class,
             ])
             ->colors([
-                'primary' => "#91615D",
+                'primary' => "#9C5B46",
             ])
             ->login()
             ->registration()            
@@ -110,7 +110,7 @@ class ClientPanelProvider extends PanelProvider
 
             //     return true;
             // })
-            ->discoverWidgets(in: app_path('Filament/Client/Widgets'), for: 'App\\Filament\\Client\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Client/Resources/ServiceClientResource/Widgets'), for: 'App\\Filament\\Client\\Resources\\ServiceClientResource\\Widgets')
             ->widgets([
                 Widgets\StatsOverviewWidget::class,
             ])
