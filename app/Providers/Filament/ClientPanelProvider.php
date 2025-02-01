@@ -6,6 +6,7 @@ use App\Filament\Client\Pages\CompleteSignup;
 use App\Filament\Client\Resources\ServiceRequestResource;
 use App\Filament\Client\Resources\ServicoResource as ResourcesServicoResource;
 use App\Filament\Client\Resources\TabelaPrecoResource;
+use App\Filament\Client\Resources\PerfilClientResource;
 use App\Filament\Resources\ServicoResource;
 use App\Http\Responses\CustomLoginResponse;
 use App\Http\Responses\CustomRegistrationResponse;
@@ -51,6 +52,9 @@ class ClientPanelProvider extends PanelProvider
             })
             ->id('client')
             ->path('client')
+            ->resources([
+                \App\Filament\Client\Resources\PerfilClientResource::class,
+            ])
             ->colors([
                 'primary' => "#91615D",
             ])
@@ -86,14 +90,12 @@ class ClientPanelProvider extends PanelProvider
                                 ->label('Dashboard')
                                 ->icon('heroicon-o-home')
                                 ->url('/client'),
-
+                            
                             ...ServicoResource::getNavigationItems(),
                             ...ServiceRequestResource::getNavigationItems(),
                             ...TabelaPrecoResource::getNavigationItems(),
-                            // NavigationItem::make('Serviços')
-                            //     ->label('Central de Serviços')
-                            //     ->icon('heroicon-o-shopping-cart')
-                            //     ->url('/client/service-center'),
+                            ...PerfilClientResource::getNavigationItems(),
+                         
                         ])
                     ;
                 } else {

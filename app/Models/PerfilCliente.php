@@ -22,4 +22,9 @@ class PerfilCliente extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getEditUrl(): string
+{
+    return route('filament.client.resources.perfil-clients.edit', $this);
+}
 }

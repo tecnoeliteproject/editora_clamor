@@ -17,7 +17,7 @@ class TabelaPrecoResource extends Resource
 
     protected static ?string $label = 'Tabela de preços';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     protected static ?string $navigationLabel = 'Tabela de preços';
 

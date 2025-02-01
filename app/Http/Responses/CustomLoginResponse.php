@@ -11,7 +11,19 @@ use Livewire\Features\SupportRedirects\Redirector;
 
 class CustomLoginResponse implements Responsable
 {
-    public function toResponse($request): RedirectResponse | Redirector
+   /* 
+   public function toResponse($request): RedirectResponse | Redirector
+    {
+        $profile = PerfilCliente::where('user_id', $request->user()->id)->first();
+
+        if ($profile) {
+            return redirect()->intended(Filament::getUrl());
+        } else {
+            return redirect()->intended(CompleteSignup::getUrl());
+        }
+    }
+           */
+          public function toResponse($request): RedirectResponse | Redirector
     {
         $profile = PerfilCliente::where('user_id', $request->user()->id)->first();
 
