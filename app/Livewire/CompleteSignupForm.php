@@ -14,6 +14,7 @@ use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Livewire\Component;
+use Carbon\Carbon; 
 
 class CompleteSignupForm extends Component implements HasForms
 {
@@ -31,78 +32,108 @@ class CompleteSignupForm extends Component implements HasForms
         return $form
             ->schema([
                 Grid::make()
-                    ->columns(2)
-                    ->schema([
-                        TextInput::make('bi')
-                            ->label('NIF/BI')
-                            ->length(14)
-                            
-                            ->required(),
-                        TextInput::make('telefone')
-                            ->required(),
+    ->columns(2)
+    ->schema([
+        TextInput::make('bi')
+            ->label('NIF/BI')
+            ->length(14)
+            ->required()
+            ->regex('/^\d{9}[A-Z]{2}\d{3}$/')
+            ->validationMessages([
+                'regex' => 'O NIF/BI deve ter 14 caracteres: 9 dígitos, 2 letras maiúsculas e 3 dígitos.',
+            ]),
+        TextInput::make('telefone')
+            ->required()
+            ->regex('/^9\d{8}$/') 
+            ->validationMessages([
+                'regex' => 'O número de telefone deve ter 9 dígitos e começar com 9.',
+            ]),
+    ]),
+Grid::make()
+    ->columns(2)
+    ->schema([
+        DatePicker::make('data_nascimento')
+                    ->label('Data de Nascimento')
+                    ->native(false)
+                    ->hint('Ex: 01/01/2000')
+                    ->required()
+                    ->rules([
+                        'before:' . Carbon::now()->subYears(6)->format('Y-m-d'), // Valida que a data é anterior a 6 anos atrás
+                    ])
+                    ->validationMessages([
+                        'before' => 'O cliente deve ter pelo menos 6 anos de idade.',
                     ]),
-                Grid::make()
-                    ->columns(2)
-                    ->schema([
-                        DatePicker::make('data_nascimento')
-                            ->label('Data de Nascimento')
-                            ->native(false)
-                            ->hint('Ex: 01/01/2000')
-                            ->required(),
-                        TextInput::make('nacionalidade')
-                            ->default('Angolana')
-                            ->required(),
-                    ]),
-                Grid::make()
-                    ->columns(2)
-                    ->schema([
-                        TextInput::make('provincia')
-                            ->required(),
-                        TextInput::make('municipio')
-                            ->required(),
-                    ]),
-                Grid::make()
-                    ->columns(2)
-                    ->schema([
-                        Select::make('genero')
-                            ->required()
-                            ->options([
-                                'masculino' => 'Masculino',
-                                'feminino' => 'Feminino',
-                            ])
-                            ->default('masculino'),
-                        Select::make('estado_civil')
-                            ->required()
-                            ->options([
-                                'solteiro' => 'Solteiro(a)',
-                                'casado' => 'Casado(a)',
-                                'divorciado' => 'Divorciado(a)',
-                                'viuvo' => 'Viuvo(a)',
-                            ])
-                            ->default('solteiro'),
-                    ]),
-                Grid::make()
-                    ->columns(2)
-                    ->schema([
-                        Select::make('nivel_academico')
-                            ->label('Nivel de Formação')
-                            ->required()
-                            ->options([
-                                'Básico' => 'Básico',
-                                'Médio' => 'Médio',
-                                'Licenciado' => 'Licenciado',
-                                'Mestre' => 'Mestre',
-                                'PhD' => 'PhD',
-                            ])
-                            ->default('Médio'),
-                        TextInput::make('morada')
-                            ->required(),
-                    ]),
-                FileUpload::make('copia_bilhete')
-                    ->label('Copia do Bilhete de Identidade (PDF)')
-                    ->acceptedFileTypes(['application/pdf'])
-                    // ->required()
-                    ->directory('bilhetes'),
+        TextInput::make('nacionalidade')
+            ->default('Angolana')
+            ->required()
+            ->regex('/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/')
+            ->validationMessages([
+                'regex' => 'A nacionalidade deve conter apenas letras e espaços.',
+            ]),
+    ]),
+Grid::make()
+    ->columns(2)
+    ->schema([
+        TextInput::make('provincia')
+            ->required()
+            ->regex('/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/')
+            ->validationMessages([
+                'regex' => 'O nome da província deve conter apenas letras e espaços.',
+            ]),
+        TextInput::make('municipio')
+            ->required()
+            ->regex('/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/') 
+            ->validationMessages([
+                'regex' => 'O nome do município deve conter apenas letras e espaços.',
+            ]),
+    ]),
+Grid::make()
+    ->columns(2)
+    ->schema([
+        Select::make('genero')
+            ->required()
+            ->options([
+                'masculino' => 'Masculino',
+                'feminino' => 'Feminino',
+            ])
+            ->default('masculino'),
+        Select::make('estado_civil')
+            ->required()
+            ->options([
+                'solteiro' => 'Solteiro(a)',
+                'casado' => 'Casado(a)',
+                'divorciado' => 'Divorciado(a)',
+                'viuvo' => 'Viuvo(a)',
+            ])
+            ->default('solteiro'),
+    ]),
+Grid::make()
+    ->columns(2)
+    ->schema([
+        Select::make('nivel_academico')
+            ->label('Nivel de Formação')
+            ->required()
+            ->options([
+                'Básico' => 'Básico',
+                'Médio' => 'Médio',
+                'Licenciado' => 'Licenciado',
+                'Mestre' => 'Mestre',
+                'PhD' => 'PhD',
+            ])
+            ->default('Médio'),
+        TextInput::make('morada')
+            ->required()
+            ->regex('/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s.,-]+$/')
+            ->validationMessages([
+                'regex' => 'A morada deve conter apenas letras, números, espaços e caracteres especiais (.,-).',
+            ]),
+    ]),
+FileUpload::make('copia_bilhete')
+    ->label('Copia do Bilhete de Identidade (PDF)')
+    ->acceptedFileTypes(['application/pdf'])
+    // ->required()
+    ->directory('bilhetes'),
+                 
             ])
             ->statePath('data');
     }

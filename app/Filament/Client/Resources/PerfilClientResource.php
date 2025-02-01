@@ -4,12 +4,17 @@ namespace App\Filament\Client\Resources;
 use App\Filament\Client\Resources\PerfilClientResource\Pages;
 use App\Models\PerfilCliente;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Carbon\Carbon; 
 
 
 class PerfilClientResource extends Resource
@@ -24,7 +29,7 @@ class PerfilClientResource extends Resource
     {
         // Exibe o recurso no menu apenas se o usuário estiver logado e tiver um perfil
         return auth()->check() && PerfilCliente::where('user_id', auth()->id())->exists();
-        
+
     }
 
     public static function getNavigationUrl(): string
@@ -37,38 +42,75 @@ class PerfilClientResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('bi')
+                TextInput::make('bi')
                     ->label('NIF/BI')
-                    ->required(),
-                Forms\Components\TextInput::make('telefone')
-                    ->required(),
-                Forms\Components\DatePicker::make('data_nascimento')
+                    ->length(14)
+                    ->required()
+                    ->regex('/^\d{9}[A-Z]{2}\d{3}$/')
+                    ->validationMessages([
+                        'regex' => 'O NIF/BI deve ter 14 caracteres: 9 dígitos, 2 letras maiúsculas e 3 dígitos.',
+                    ]),
+                TextInput::make('telefone')
+                    ->required()
+                    ->regex('/^9\d{8}$/')
+                    ->validationMessages([
+                        'regex' => 'O número de telefone deve ter 9 dígitos e começar com 9.',
+                    ]),
+                DatePicker::make('data_nascimento')
                     ->label('Data de Nascimento')
-                    ->required(),
-                Forms\Components\TextInput::make('nacionalidade')
+                    ->native(false)
+                    ->hint('Ex: 01/01/2000')
+                    ->required()
+                    ->rules([
+                        'before:' . Carbon::now()->subYears(6)->format('Y-m-d'), // Valida que a data é anterior a 6 anos atrás
+                    ])
+                    ->validationMessages([
+                        'before' => 'O cliente deve ter pelo menos 6 anos de idade.',
+                    ]),
+                TextInput::make('nacionalidade')
                     ->default('Angolana')
-                    ->required(),
-                Forms\Components\TextInput::make('provincia')
-                    ->required(),
-                Forms\Components\TextInput::make('municipio')
-                    ->required(),
-                Forms\Components\TextInput::make('morada')
-                    ->required(),
-                Forms\Components\Select::make('genero')
+                    ->required()
+                    ->regex('/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/')
+                    ->validationMessages([
+                        'regex' => 'A nacionalidade deve conter apenas letras e espaços.',
+                    ]),
+                TextInput::make('provincia')
+                    ->required()
+                    ->regex('/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/')
+                    ->validationMessages([
+                        'regex' => 'O nome da província deve conter apenas letras e espaços.',
+                    ]),
+                TextInput::make('municipio')
+                    ->required()
+                    ->regex('/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/') 
+                    ->validationMessages([
+                        'regex' => 'O nome do município deve conter apenas letras e espaços.',
+                    ]),
+                TextInput::make('morada')
+                    ->required()
+                    ->regex('/^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s.,-]+$/')
+                    ->validationMessages([
+                        'regex' => 'A morada deve conter apenas letras, números, espaços e caracteres especiais (.,-).',
+                    ]),
+                Select::make('genero')
+                    ->required()
                     ->options([
                         'masculino' => 'Masculino',
                         'feminino' => 'Feminino',
                     ])
-                    ->required(),
-                Forms\Components\Select::make('estado_civil')
+                    ->default('masculino'),
+                Select::make('estado_civil')
+                    ->required()
                     ->options([
                         'solteiro' => 'Solteiro(a)',
                         'casado' => 'Casado(a)',
                         'divorciado' => 'Divorciado(a)',
                         'viuvo' => 'Viuvo(a)',
                     ])
-                    ->required(),
-                Forms\Components\Select::make('nivel_academico')
+                    ->default('solteiro'),
+                Select::make('nivel_academico')
+                    ->label('Nivel de Formação')
+                    ->required()
                     ->options([
                         'Básico' => 'Básico',
                         'Médio' => 'Médio',
@@ -76,7 +118,7 @@ class PerfilClientResource extends Resource
                         'Mestre' => 'Mestre',
                         'PhD' => 'PhD',
                     ])
-                    ->required(),
+                    ->default('Médio'),
                 Forms\Components\FileUpload::make('copia_bilhete')
                     ->label('Cópia do Bilhete de Identidade (PDF)')
                     ->acceptedFileTypes(['application/pdf'])
@@ -88,7 +130,7 @@ class PerfilClientResource extends Resource
     {
         // Verifica se o perfil do usuário logado já existe
         $perfil = PerfilCliente::where('user_id', auth()->id())->first();
-    
+
         // Retorna a query filtrada pelo perfil do usuário logado
         return parent::getEloquentQuery()->where('user_id', auth()->id());
     }
