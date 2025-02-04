@@ -10,13 +10,15 @@
     "require": {
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^3.1",
-        "filament/filament": "^3.2",
+        "filament/actions": "*",
+        "filament/filament": "*",
+        "filament/tables": "*",
         "guzzlehttp/guzzle": "^7.2",
         "joaopaulolndev/filament-pdf-viewer": "^1.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.4"
+        "livewire/livewire": "^3.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

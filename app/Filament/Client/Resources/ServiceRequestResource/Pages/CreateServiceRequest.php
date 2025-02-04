@@ -32,7 +32,7 @@ class CreateServiceRequest extends CreateRecord
         $data['service_id'] = $data['servico'];
         $data['price_id'] = $data['price_id'];
         $data['status'] = 'pendente';
-        $data['comprovativo_pagamento_url'] = $data['comprovativo_pagamento'];
+        $data['documento_url'] = $data['documento'];
         $data['quantidade_paginas'] = $data['num_paginas'];
         $data['observacoes'] = $data['observacoes'];
 
@@ -46,7 +46,7 @@ class CreateServiceRequest extends CreateRecord
             'service_id' => $data['service_id'],
             'price_id' => $data['price_id'],
             'status' => $data['status'],
-            'comprovativo_pagamento_url' => $data['comprovativo_pagamento_url'],
+            'documento_url' => $data['documento_url'],
             'quantidade_paginas' => $data['quantidade_paginas'],
             'observacoes' => $data['observacoes'],
         ]);

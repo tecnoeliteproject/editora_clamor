@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ServiceRequestController;
 use App\Livewire\ShowContacto;
 use App\Livewire\ShowFAQ;
 use App\Livewire\ShowHome;
@@ -33,6 +34,8 @@ Route::get('/', function () {
 
 Route::get('/relatorio', [ReportController::class, 'generateReport']);
 Route::get('/usuarios/relatorio', [UserReportController::class, 'generate'])->name('usuarios.relatorio');
+Route::get('/service-requests/{id}/contract', [ServiceRequestController::class, 'generateContract'])->name('contracts.contract');
+Route::get('/service-requests/{id}/invoice', [ServiceRequestController::class, 'generateInvoice'])->name('invoices.invoice');
 
 
 

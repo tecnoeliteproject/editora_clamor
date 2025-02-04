@@ -17,6 +17,11 @@ class ServiceRequest extends Model
         return $this->belongsTo(Servico::class, 'service_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function preco()
     {
         return $this->belongsTo(Price::class, 'price_id');

@@ -70,8 +70,10 @@ class ServiceRequestResource extends Resource
                     ->options(Servico::all()->pluck('nome', 'id'))
                     ->live()
                     ->default(1)
-                    // ->native(false)
-                    ->required(),
+                    ->required()
+                    ->hidden(function ($get) {
+                        return $get('status') === 'em andamento';
+                    }),
                 // campo invisivel para armazenar o id do preco
                 TextInput::make('preco_id')
                     ->hidden(),
@@ -96,13 +98,22 @@ class ServiceRequestResource extends Resource
                             }
                         }
                     })
-                    ->required(),
+                    ->required()
+                    ->hidden(function ($get) {
+                        return $get('status') === 'em andamento';
+                    }),
                 TextInput::make('pacote')
                     ->label('Pacote')
-                    ->disabled(),
+                    ->disabled()
+                    ->hidden(function ($get) {
+                        return $get('status') === 'em andamento';
+                    }),
                 TextInput::make('total_a_pagar')
                     ->label('Total a Pagar')
-                    ->disabled(),
+                    ->disabled()
+                    ->hidden(function ($get) {
+                        return $get('status') === 'em andamento';
+                    }),
                 // Select::make('servico_price')
                 //     ->label('Pacote')
                 //     ->native(false)
@@ -125,13 +136,46 @@ class ServiceRequestResource extends Resource
                 //     })
                 //     ->required(),
                 Forms\Components\Textarea::make('observacoes')
-                    ->columnSpanFull(),
-                FileUpload::make('comprovativo_pagamento')
+                    ->columnSpanFull()
+                    ->hidden(function ($get) {
+                        return $get('status') === 'em andamento';
+                    }),
+                FileUpload::make('documento')
+                    ->required()
+                    ->label('Documento')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(2048)
+                    ->directory('documentos-service-requests')
+                    ->hidden(function ($get) {
+                        return $get('status') === 'em andamento';
+                    }),
+                FileUpload::make('comprovativo_pagamento_url')
                     ->required()
                     ->label('Comprovativo de Pagamento')
                     ->acceptedFileTypes(['application/pdf'])
                     ->maxSize(2048)
-                    ->directory('comprovativos-de-pagamento-service-requests'),
+                    ->directory('documentos-service-requests')
+                    ->hidden(function ($get) {
+                        return $get('status') !== 'em andamento';
+                    }),
+                FileUpload::make('contrato_url')
+                    ->required()
+                    ->label('Contrato Assinado')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(2048)
+                    ->directory('documentos-service-requests')
+                    ->hidden(function ($get) {
+                        return $get('status') !== 'em andamento';
+                    }),
+                FileUpload::make('documento_final_url')
+                    ->required()
+                    ->label('Documento Final')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->maxSize(2048)
+                    ->directory('documentos-service-requests')
+                    ->hidden(function ($get) {
+                        return $get('status') !== 'em andamento';
+                    }),
             ]);
     }
 
@@ -159,7 +203,16 @@ class ServiceRequestResource extends Resource
                         return 'Kz ' . number_format($precoTotal, 2, ',', '.');
                     })
                     ->money('AOA', true),
-                Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('status')
+                    ->label('Estado')
+                    ->formatStateUsing(fn(string $state): string => ucfirst($state))
+                    ->badge()
+                    ->color(fn(string $state): string => match ($state) {
+                        'pendente' => 'warning',
+                        'em andamento' => 'info',
+                        'finalizada' => 'success',
+                        'cancelada' => 'danger',
+                    }),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
@@ -177,8 +230,23 @@ class ServiceRequestResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('download_contrato')
+                    ->label('Baixar Contrato')
+                    ->icon('heroicon-o-document')
+                    ->color('info')
+                    ->hidden(fn(ServiceRequest $record) => $record->status !== 'em andamento') // Somente visível se estiver pago
+                    ->url(fn(ServiceRequest $record) => route('contracts.contract', $record->id))
+                    ->openUrlInNewTab(),
+                    Tables\Actions\Action::make('download_fatura')
+                    ->label('Fatura')
+                    ->icon('heroicon-o-document')
+                    ->color('success')
+                    ->hidden(fn(ServiceRequest $record) => $record->status !== 'finalizada') // Somente visível se estiver pago
+                    ->url(fn(ServiceRequest $record) => route('invoices.invoice', $record->id))
+                    ->openUrlInNewTab(),
+                    Tables\Actions\EditAction::make()
+                    ->label('Editar')
+                    ->hidden(fn(ServiceRequest $record) => $record->status === 'finalizada'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
