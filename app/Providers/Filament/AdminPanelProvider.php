@@ -34,13 +34,13 @@ class AdminPanelProvider extends PanelProvider
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
-               Pages\Dashboard::class, // Página padrão do dashboard
+               Pages\DashboardAdmin::class, // Página padrão do dashboard
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-               // Widgets\StatsOverviewWidget::class,
+              // Widgets\StatsOverviewWidget::class,
                 //\App\Filament\Widgets\RequestMes::class,
-                //\App\Filament\Resources\ServiceRequestResource\Widgets\RequestestPendentesEmProcesso::class,
+               // \App\Filament\Resources\ServiceRequestResource\Widgets\RequestestPendentesEmProcesso::class,
             ])
             ->middleware([
                 EncryptCookies::class,
