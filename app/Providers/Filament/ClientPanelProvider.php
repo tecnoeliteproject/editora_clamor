@@ -7,6 +7,7 @@ use App\Filament\Client\Resources\ServiceRequestResource;
 use App\Filament\Client\Resources\ServicoResource as ResourcesServicoResource;
 use App\Filament\Client\Resources\TabelaPrecoResource;
 use App\Filament\Client\Resources\PerfilClientResource;
+use App\Filament\Login\CustomLoginPage;
 use App\Filament\Resources\ServicoResource;
 use App\Http\Responses\CustomLoginResponse;
 use App\Http\Responses\CustomRegistrationResponse;
@@ -58,8 +59,8 @@ class ClientPanelProvider extends PanelProvider
             ->colors([
                 'primary' => "#9C5B46",
             ])
-            ->login()
-            ->registration()            
+            ->login(CustomLoginPage::class)
+            ->registration()
             ->viteTheme('resources/css/filament/client/theme.css')
             ->discoverResources(in: app_path('Filament/Client/Resources'), for: 'App\\Filament\\Client\\Resources')
             ->discoverPages(in: app_path('Filament/Client/Pages'), for: 'App\\Filament\\Client\\Pages')
@@ -90,12 +91,12 @@ class ClientPanelProvider extends PanelProvider
                                 ->label('Dashboard')
                                 ->icon('heroicon-o-home')
                                 ->url('/client'),
-                            
+
                             ...ServicoResource::getNavigationItems(),
                             ...ServiceRequestResource::getNavigationItems(),
                             ...TabelaPrecoResource::getNavigationItems(),
                             ...PerfilClientResource::getNavigationItems(),
-                         
+
                         ])
                     ;
                 } else {
