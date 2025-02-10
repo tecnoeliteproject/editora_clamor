@@ -1,46 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Contrato</title>
+    <title>Factura</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .header { text-align: center; }
-        .content { margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        table, th, td { border: 1px solid black; }
-        th, td { padding: 10px; text-align: left; }
-        .total { text-align: right; font-weight: bold; margin-top: 20px; }
+        /* Estilos anteriores... */
     </style>
 </head>
 <body>
     <div class="header">
-        
-        <img src="C:\Users\Surface\Documents\dev\editora_clamor\public\images\icon-4.png" alt="Logo da Empresa">
-        
-        <h1>Contrato de Serviço</h1>
+        <img src="C:\Users\Surface\Documents\dev\editora_clamor\public\images\logo.png" alt="Logo da Empresa"   style="height: 100px;">
+        <h1>Factura</h1>
     </div>
     <div class="content">
         <p><strong>Cliente:</strong> {{ $cliente->name }}</p>
-        <p><strong>Email:</strong> {{ $cliente->email }}</p>
-        <p><strong>Responsável:</strong> {{ $usuario_responsavel }}</p>
+        @if(isset($perfilCliente))
+        <p><strong>Número de Telefone:</strong> {{ $perfilCliente->telefone }}</p>
+        @else
+            <p><strong>Erro:</strong> Perfil do cliente não encontrado.</p>
+        @endif
+        <p><strong>Data da Fatura:</strong> {{ $date }}</p>
 
-
+        <h2>Detalhes do Serviço</h2>
         <table>
             <thead>
                 <tr>
                     <th>Serviço</th>
+                    <th>Valor</th>
                 </tr>
             </thead>
             <tbody>
-            
-             <tr>
-                        <td>{{ $servicos}}</td>
-                    </tr>
-            
-                
+                <tr>
+                    <td>{{ $servicos }}</td>
+                    <td>Kz 400</td>
+                </tr>
             </tbody>
         </table>
+
+        <div class="total">
+            <p><strong>Total a Pagar:</strong> Kz 400</p>
+        </div>
+
+               <div class="signature-section">
+            
+
+            <p><strong>O Responsável</strong></p>
+            <p>_________________________________________</p>
+            <p></p>
+            <p>Data: {{ $date }}</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Editora Clamor &copy; {{ date('Y') }}. Todos os direitos reservados.</p>
     </div>
 </body>
 </html>

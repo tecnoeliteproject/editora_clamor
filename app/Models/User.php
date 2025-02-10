@@ -35,7 +35,7 @@ class User extends Authenticatable implements FilamentUser
         return $this-> can('view-admin', User::class);
     }
 
-    public function perfilClient()
+    public function perfilCliente()
     {
         return $this->hasOne(PerfilCliente::class);
     }

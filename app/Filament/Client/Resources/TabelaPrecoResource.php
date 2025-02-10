@@ -15,11 +15,11 @@ class TabelaPrecoResource extends Resource
 {
     protected static ?string $model = Price::class;
 
-    protected static ?string $label = 'Tabela de preços';
+    protected static ?string $label = 'Tabela de Preços';
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
-    protected static ?string $navigationLabel = 'Tabela de preços';
+    protected static ?string $navigationLabel = 'Tabela de Preços';
 
 
     public static function form(Form $form): Form

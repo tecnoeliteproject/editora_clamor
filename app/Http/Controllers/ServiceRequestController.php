@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreServiceRequestRequest;
 use App\Http\Requests\UpdateServiceRequestRequest;
+use App\Models\PerfilCliente;
 use App\Models\ServiceRequest;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
@@ -79,6 +80,7 @@ class ServiceRequestController extends Controller
         $data = [
             'title' => 'Contrato de Exemplo',
             'cliente' => $request->user,
+            'perfilCliente' => $request->user,
             'servicos' => $request->servico->nome,
             'date' => date('d/m/Y'),
             'usuario_responsavel' => $request->user_responsavel,
@@ -96,12 +98,12 @@ class ServiceRequestController extends Controller
     {
        // $request = ServiceRequest::with(['user', 'servico'])->find($id);
        $request = ServiceRequest::with(['user', 'servico'])->find($id);
-        $user = User::find(Auth::user()->id);
+       $user = User::find(Auth::user()->id);
 
 
         // Dados que serão enviados para a view
         $data = [
-            'title' => 'Contrato de Exemplo',
+            'title' => 'Fatura de Exemplo',
             'cliente' => $request->user,
             'servicos' => $request->servico->nome,
             'date' => date('d/m/Y'),
@@ -115,4 +117,5 @@ class ServiceRequestController extends Controller
         // Baixar o PDF
         return $pdf->download('factura-' . $request->id . '.pdf');
     }
+
 }

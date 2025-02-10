@@ -60,7 +60,7 @@
     <!-- Cabeçalho -->
     <div class="header">
        <!-- <img src="{{ public_path('images/logo.png') }}" alt="Logotipo" style="height: 50px;"> -->
-        <img src="../../images/home/1.jpg" alt="Logotipo" style="height: 50px;">
+         <img src="C:\Users\Surface\Documents\dev\editora_clamor\public\images\logo.png" alt="Logo da Empresa" style="height: 100px;">
         <h1>Editora Clamor</h1>
         <p>Endereço: Joaquim Capango, Cuito - Bié, Angola</p>
         <p>Contato: (+244) 939 748 361 | (+244) 923 000 000 | editoraclamor@gmail.com</p>

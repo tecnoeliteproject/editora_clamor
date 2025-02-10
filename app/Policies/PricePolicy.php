@@ -29,7 +29,7 @@ class PricePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -37,7 +37,7 @@ class PricePolicy
      */
     public function update(User $user, Price $price): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
@@ -45,7 +45,7 @@ class PricePolicy
      */
     public function delete(User $user, Price $price): bool
     {
-        return false;
+        return $user->isAdmin();
     }
 
     /**
