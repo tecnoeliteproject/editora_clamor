@@ -31,25 +31,25 @@ class User extends Authenticatable implements FilamentUser
         self::ROLE_CLIENT => 'Client',
     ];
 
-    public function canAccessPanel(Panel $panel): bool{
-        return $this-> can('view-admin', User::class);
-    }
 
     public function perfilCliente()
     {
         return $this->hasOne(PerfilCliente::class);
     }
 
-    public function isAdmin(){
-        return $this-> role === self::ROLE_ADMIN;
+    public function isAdmin()
+    {
+        return $this->role === self::ROLE_ADMIN;
     }
 
-    public function isEditor(){
-        return $this-> role === self::ROLE_EDITOR;
+    public function isEditor()
+    {
+        return $this->role === self::ROLE_EDITOR;
     }
 
-    public function isClient(){
-        return $this-> role === self::ROLE_CLIENT;
+    public function isClient()
+    {
+        return $this->role === self::ROLE_CLIENT;
     }
 
     protected $fillable = [
@@ -79,4 +79,20 @@ class User extends Authenticatable implements FilamentUser
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function canUserAccessPanel($role): bool
+    {
+        return strtolower($this->role) === strtolower($role);
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+            return strtolower($this->role) === strtolower('ADMIN');;
+        } else if ($panel->getId() === 'client') {
+            return strtolower($this->role) === strtolower('USER');;
+        }
+
+        return true;
+    }
 }
