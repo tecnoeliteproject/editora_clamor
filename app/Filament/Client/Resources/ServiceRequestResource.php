@@ -114,27 +114,6 @@ class ServiceRequestResource extends Resource
                     ->hidden(function ($get) {
                         return $get('status') === 'em andamento';
                     }),
-                // Select::make('servico_price')
-                //     ->label('Pacote')
-                //     ->native(false)
-                //     ->options(function (Get $get) {
-                //         $prices = Price::where('servico_id', $get('servico'));
-
-                //         $output = [];
-                //         foreach ($prices->get() as $value) {
-                //             $output[] = 'Até ' . $value->quantidade_paginas . ' Pagínas' . ' - Kz ' . number_format($value->price, 2, ',', '.') . '/pag';
-                //         }
-
-                //         return $output;
-                //     })
-                //     ->afterStateUpdated(function (Get $get, Set $set, ?string $old, ?string $state) {
-                //         if ($old !== $state) {
-                //             $set('pacote', null);
-                //         }
-
-                //         return;
-                //     })
-                //     ->required(),
                 Forms\Components\Textarea::make('observacoes')
                     ->columnSpanFull()
                     ->hidden(function ($get) {
@@ -184,26 +163,33 @@ class ServiceRequestResource extends Resource
         return $table
             ->query(ServiceRequest::query()->where('user_id', auth()->id()))
             ->columns([
-                Tables\Columns\TextColumn::make('servico.nome')
+                TextColumn::make('id')
+                ->label('ID')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('quantidade_paginas'),
-                Tables\Columns\TextColumn::make('price')
+                TextColumn::make('servico.nome')
+                ->label('Serviço')
+                    ->sortable(),
+                TextColumn::make('quantidade_paginas')
+                ->label('Páginas')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('price')
                     ->label('Preço Total')
                     ->searchable()
                     ->state(function (ServiceRequest $record) {
                         $precoTotal = $record->preco->price;
-                        return 'Kz ' . number_format($precoTotal, 2, ',', '.') . '/pag';
+                        return number_format($precoTotal, 2, ',', '.') . ' Kz' . '/pag';
                     })
                     ->money('AOA', true),
-                Tables\Columns\TextColumn::make('preco_total')
+                TextColumn::make('preco_total')
                     ->label('Preço Total')
                     ->searchable()
                     ->state(function (ServiceRequest $record) {
                         $precoTotal = $record->quantidade_paginas * $record->preco->price;
-                        return 'Kz ' . number_format($precoTotal, 2, ',', '.');
+                        return number_format($precoTotal, 2, ',', '.') . ' Kz ' ;
                     })
                     ->money('AOA', true),
-                Tables\Columns\TextColumn::make('status')
+                TextColumn::make('status')
                     ->label('Estado')
                     ->formatStateUsing(fn(string $state): string => ucfirst($state))
                     ->badge()
@@ -213,15 +199,18 @@ class ServiceRequestResource extends Resource
                         'finalizada' => 'success',
                         'cancelada' => 'danger',
                     }),
-                Tables\Columns\TextColumn::make('deleted_at')
+                TextColumn::make('deleted_at')
+                ->label('Data de Eliminação')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
+                ->label('Data de Criação')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                ->label('Data de Actualização')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -246,6 +235,8 @@ class ServiceRequestResource extends Resource
                     ->openUrlInNewTab(),
                     Tables\Actions\EditAction::make()
                     ->label('Editar')
+                    ->icon('heroicon-o-pencil')
+                    ->color('warning')
                     ->hidden(fn(ServiceRequest $record) => $record->status === 'finalizada'),
             ])
             ->bulkActions([

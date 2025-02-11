@@ -27,6 +27,8 @@ class ServicoResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-rectangle-group';
     protected static ?string $modelLabel = 'Servicos';
+
+    protected static ?string $navigationLabel = 'Serviços';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -41,7 +43,6 @@ class ServicoResource extends Resource
                         1 => 'Disponível',
                         0 => 'Indisponível'
                     ]),
-
                 MarkdownEditor::make('descricao')
                     ->nullable()
                     ->columnSpanFull(),
@@ -54,31 +55,23 @@ class ServicoResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('code')
+                TextColumn::make('id')
+                ->label('ID')
                     ->sortable(),
                 TextColumn::make('nome')
+                ->label('Serviço')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('descricao')
-                    ->searchable()
-                    ->sortable(),
-                // TextColumn::make('pricing_formatted')
-                //     ->label('Tabela de Preços')
-                //     ->getStateUsing(function (Servico $record): string {
-                //         //'return $record->prices->price;'
-
-                //         return $record->pricingFormatted();
-                //     })
-                //     ->disabled(), // Apenas para leitura/ Apenas para leitura,
-                ImageColumn::make('imagem')
-                    ->toggleable(),
                 IconColumn::make('estado')
-                    ->boolean(),
+                    ->boolean()
+                    ->searchable(),
                 TextColumn::make('created_at')
+                ->label('Data de Criação')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                ->label('Data de Actualização')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -87,8 +80,14 @@ class ServicoResource extends Resource
                 TernaryFilter::make('estado')->label('Disponível?'),
             ])
             ->actions([
-                Tables\Actions\DeleteAction::make()->label('Eliminar'),
-                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\EditAction::make()
+                ->label('Editar')
+                ->icon('heroicon-o-pencil')
+                ->color('warning'),
+            Tables\Actions\DeleteAction::make()
+                ->label('Eliminar')
+                ->icon('heroicon-o-trash')
+                ->color('danger'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

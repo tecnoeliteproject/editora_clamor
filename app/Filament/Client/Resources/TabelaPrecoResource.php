@@ -42,10 +42,13 @@ class TabelaPrecoResource extends Resource
             ->paginationPageOptions([50])
             ->defaultSort('quantidade_paginas', 'asc')
             ->columns([
-                TextColumn::make('id'),
+                TextColumn::make('id')
+                    ->label('ID')
+                    ->sortable(),
                 TextColumn::make('price')
+                ->label('Preço')
                     ->state(function (Price $record) {
-                        return 'Kz ' . number_format($record->price, 2, ',', '.') . '/pag';
+                        return number_format($record->price, 2, ',', '.') .' Kz'. '/pag';
                     }),
                 TextColumn::make('quantidade_paginas')
                     ->state(function (Price $record) {

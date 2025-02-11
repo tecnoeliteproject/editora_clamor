@@ -18,6 +18,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -33,6 +34,8 @@ class ServiceRequestResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Serviços solicitados';
+
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -40,7 +43,7 @@ class ServiceRequestResource extends Resource
                 TextEntry::make('servico.nome')
                     ->label('Serviço'),
                 TextEntry::make('status')
-                    ->label('Status'),
+                    ->label('Estado'),
                 TextEntry::make('quantidade_paginas')
                     ->label('Número de Páginas'),
                 TextEntry::make('preco.price')
@@ -85,28 +88,16 @@ class ServiceRequestResource extends Resource
                 TextInput::make('quantidade_paginas')
                     ->label('Número de Páginas')
                     ->required()
-                    ->disabled()
-                    ->hidden(function ($get) {
-                        return $get('status') !== 'em andamento';
-                    }),
+                    ->disabled(),
                 TextInput::make('pacote')
                     ->label('Pacote')
-                    ->disabled()
-                    ->hidden(function ($get) {
-                        return $get('status') !== 'em andamento';
-                    }),
+                    ->disabled(),
                 TextInput::make('total_a_pagar')
                     ->label('Total a Pagar')
-                    ->disabled()
-                    ->hidden(function ($get) {
-                        return $get('status') !== 'em andamento';
-                    }),
+                    ->disabled(),
                 Forms\Components\Textarea::make('observacoes')
-                    ->columnSpanFull()
-                    ->disabled()
-                    ->hidden(function ($get) {
-                        return $get('status') !== 'em andamento';
-                    }),
+                    ->label('Observações')
+                    ->columnSpanFull(),
                 PdfViewerField::make('teste')
                     ->label('Documento Inicial')
                     ->fileUrl(function (ServiceRequest $record) {
@@ -114,7 +105,7 @@ class ServiceRequestResource extends Resource
                     })
                     ->columnSpan(2)
                     ->minHeight('80svh'),
-                    PdfViewerField::make('teste')
+                PdfViewerField::make('teste')
                     ->label('Comprovativo de Pagamento')
                     ->fileUrl(function (ServiceRequest $record) {
                         return Storage::url($record->comprovativo_pagamento_url);
@@ -124,7 +115,7 @@ class ServiceRequestResource extends Resource
                     ->hidden(function ($get) {
                         return $get('status') === 'pendente';
                     }),
-                    PdfViewerField::make('teste')
+                PdfViewerField::make('teste')
                     ->label('Contrato Assinado')
                     ->fileUrl(function (ServiceRequest $record) {
                         return Storage::url($record->contrato_url);
@@ -134,7 +125,7 @@ class ServiceRequestResource extends Resource
                     ->hidden(function ($get) {
                         return $get('status') === 'pendente';
                     }),
-                    PdfViewerField::make('teste')
+                PdfViewerField::make('teste')
                     ->label('Documento Final')
                     ->fileUrl(function (ServiceRequest $record) {
                         return Storage::url($record->documento_final_url);
@@ -152,26 +143,35 @@ class ServiceRequestResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('servico.nome')
+                TextColumn::make('id')
+                    ->label('ID')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('quantidade_paginas'),
-                Tables\Columns\TextColumn::make('price')
-                    ->label('Preço Total')
+                TextColumn::make('servico.nome')
+                    ->label('Serviço')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('quantidade_paginas')
+                    ->label('Páginas')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('price')
+                    ->label('Preço')
                     ->searchable()
                     ->state(function (ServiceRequest $record) {
                         $precoTotal = $record->preco->price;
-                        return 'Kz ' . number_format($precoTotal, 2, ',', '.') . '/pag';
+                        return number_format($precoTotal, 2, ',', '.') . ' Kz' . '/pag';
                     })
                     ->money('AOA', true),
-                Tables\Columns\TextColumn::make('preco_total')
+                TextColumn::make('preco_total')
                     ->label('Preço Total')
                     ->searchable()
+                    ->sortable()
                     ->state(function (ServiceRequest $record) {
                         $precoTotal = $record->quantidade_paginas * $record->preco->price;
-                        return 'Kz ' . number_format($precoTotal, 2, ',', '.');
+                        return number_format($precoTotal, 2, ',', '.') . ' Kz';
                     })
                     ->money('AOA', true),
-                Tables\Columns\TextColumn::make('status')
+                TextColumn::make('status')
                     ->label('Estado')
                     ->formatStateUsing(fn(string $state): string => ucfirst($state))
                     ->badge()
@@ -180,17 +180,21 @@ class ServiceRequestResource extends Resource
                         'em andamento' => 'info',
                         'finalizada' => 'success',
                         'cancelada' => 'danger',
-                    }),
-                    
-                Tables\Columns\TextColumn::make('deleted_at')
+                    })
+                    ->searchable(),
+
+                TextColumn::make('deleted_at')
+                    ->label('Data de exclusão')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('created_at')
+                TextColumn::make('created_at')
+                    ->label('Data de criação')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+                TextColumn::make('updated_at')
+                    ->label('Data de actualização')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -199,29 +203,31 @@ class ServiceRequestResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                
+
                 Tables\Actions\Action::make('download_contrato')
-                    ->label('Baixar Contrato')
+                    ->label('Contrato')
                     ->icon('heroicon-o-document')
                     ->color('info')
                     ->hidden(fn(ServiceRequest $record) => $record->status !== 'em andamento') // Somente visível se estiver pago
                     ->url(fn(ServiceRequest $record) => route('contracts.contract', $record->id))
                     ->openUrlInNewTab(),
-                    Tables\Actions\Action::make('download_fatura')
+                Tables\Actions\Action::make('download_fatura')
                     ->label('Fatura')
                     ->icon('heroicon-o-document')
                     ->color('success')
                     ->hidden(fn(ServiceRequest $record) => $record->status !== 'finalizada') // Somente visível se estiver pago
                     ->url(fn(ServiceRequest $record) => route('invoices.invoice', $record->id))
                     ->openUrlInNewTab(),
-                    Tables\Actions\EditAction::make()
+                Tables\Actions\EditAction::make()
                     ->label('Editar')
-                    ->hidden(fn(ServiceRequest $record) => $record->status === 'finalizada'),
-                
+                    ->hidden(fn(ServiceRequest $record) => $record->status === 'finalizada')
+                    ->icon('heroicon-o-pencil')
+                    ->color('warning'),
+
 
             ])
             ->bulkActions([
-                    Tables\Actions\BulkActionGroup::make([
+                Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                     Tables\Actions\ForceDeleteBulkAction::make(),
                     Tables\Actions\RestoreBulkAction::make(),

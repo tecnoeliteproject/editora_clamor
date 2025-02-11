@@ -11,6 +11,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -21,7 +22,10 @@ class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
+    protected static ?string $label = 'Usuários';
     protected static ?string $navigationIcon = 'heroicon-o-user';
+
+    protected static ?string $navigationLabel = 'Usuários';
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
@@ -29,6 +33,7 @@ class UserResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
+                    ->label('Nome')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('email')
@@ -36,10 +41,12 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 TextInput::make('password')
+                    ->label('Senha')
                     ->password()
                     ->required()
                     ->maxLength(255),
                 Select::make('role')
+                    ->label('Acesso')
                     ->options(User::ROLES),
             ]);
     }
@@ -48,12 +55,18 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('id')
+                ->label('ID')
+                    ->sortable(),
+                TextColumn::make('name')
+                ->label('Nome')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('email')
+                TextColumn::make('email')
+                ->label('E-mail')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('role')
+                TextColumn::make('role')
+                ->label('Acesso')
                     ->searchable()
                     ->sortable()
                     ->badge()
@@ -70,14 +83,21 @@ class UserResource extends Resource
                     ->label('Gerar Relatório')
                     ->color('primary')
                     ->icon('heroicon-o-document-text')
-                    ->action(fn () => redirect()->route('usuarios.relatorio')),
+                    ->action(fn() => redirect()->route('usuarios.relatorio')),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\DeleteAction::make()->label('Eliminar'),
-                Tables\Actions\EditAction::make()->label('Editar'),
+                Tables\Actions\EditAction::make()
+                    ->label('Editar')
+                    ->icon('heroicon-o-pencil')
+                    ->color('warning'),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Eliminar')
+                    ->icon('heroicon-o-trash')
+                    ->color('danger'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

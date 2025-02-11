@@ -11,6 +11,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class ServicoResource extends Resource
@@ -25,7 +26,6 @@ class ServicoResource extends Resource
             ->columns(2)
             ->schema([
                 TextEntry::make('nome'),
-                TextEntry::make('descricao'),
                 TextEntry::make('estado')
                     ->label('Disponibilidade')
                     ->badge()
@@ -47,7 +47,7 @@ class ServicoResource extends Resource
                         $saida = [];
 
                         foreach ($precos as $preco) {
-                            $saida['Até ' . $preco->quantidade_paginas] = 'Kz ' . $preco->price . '/pag';
+                            $saida['Até ' . $preco->quantidade_paginas] =  $preco->price .' Kz '. '/pag';
                         }
 
                         return $saida;
@@ -77,19 +77,20 @@ class ServicoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome')
+                TextColumn::make('id')
+                ->label('ID')    
+                ->sortable(),
+                TextColumn::make('nome')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('descricao')
-                    ->searchable(),
-                // Tables\Columns\TextColumn::make('imagem')
-                //     ->searchable(),
                 Tables\Columns\IconColumn::make('estado')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
+                ->label('Data de Criação')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                ->label('Data de Actualização')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -99,7 +100,6 @@ class ServicoResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
